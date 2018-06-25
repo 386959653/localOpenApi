@@ -1,17 +1,15 @@
 package com.weichi.erp.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.weichi.erp.component.myType.JsonResult;
+import com.weichi.erp.domain.SysUser;
 import com.weichi.erp.domain.TBlog;
-import com.weichi.erp.domain.User;
 import com.weichi.erp.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * Created by Wewon on 2018/5/15 10:21
@@ -25,8 +23,9 @@ public class GreetingController {
     @RequestMapping("/hello2")
     public String index() {
         logger.info("hello world");
-//        return "Greetings from Spring Boot!";
-        return service.selectById(1).toString();
+//        UserGroupEnums.GroupRole.吃货.name();
+        return "Greetings from Spring Boot!";
+//        return service.selectById(1).toString();
     }
 
     @RequestMapping("/userList")
@@ -34,4 +33,24 @@ public class GreetingController {
 
         return service.getPage();
     }
+
+    @RequestMapping("/updateUserTest")
+    public boolean updateUserTest() {
+        SysUser sysUser = new SysUser();
+        sysUser.setId(1L);
+        return sysUser.updateById();
+    }
+
+    @RequestMapping("/insertUserTest")
+    public boolean insertUserTest() {
+        SysUser sysUser = new SysUser();
+        return sysUser.insert();
+    }
+
+    @RequestMapping("jsonResultTest")
+    public JsonResult<?> jsonResultTest() {
+        JsonResult jsonResult = new JsonResult();
+        return jsonResult;
+    }
+
 }
