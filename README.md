@@ -26,3 +26,4 @@
     15. 实现退出系统功能
     16. 实现登录错误提示功能
     17. 实现jsonResult
+    18. 实现自定义spring security 的 UserDetails
