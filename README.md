@@ -27,3 +27,5 @@
     16. 实现登录错误提示功能
     17. 实现jsonResult
     18. 实现自定义spring security 的 UserDetails
+    19. 通过包装类AjaxHelper，实现Ajax错误提示
+    20. 引入弹框组件artDialog，并通过DlgUtils包装，使它更好用
