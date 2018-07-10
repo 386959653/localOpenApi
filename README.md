@@ -29,3 +29,4 @@
     18. 实现自定义spring security 的 UserDetails
     19. 通过包装类AjaxHelper，实现Ajax错误提示
     20. 引入弹框组件artDialog，并通过DlgUtils包装，使它更好用
+    21. 需要重新登录时候，实现了就算是Ajax也能直接跳转到登录页面
