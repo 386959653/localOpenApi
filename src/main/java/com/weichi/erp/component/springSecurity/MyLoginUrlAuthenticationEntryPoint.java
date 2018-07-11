@@ -33,7 +33,7 @@ public class MyLoginUrlAuthenticationEntryPoint extends LoginUrlAuthenticationEn
             JsonResult<?> jsonResult = JsonResult.needLoginJsonResult();
             WebUtils.renderJsonResult(response, jsonResult);
         } else {
-            request.getRequestDispatcher("/login").forward(request, response);
+            request.getRequestDispatcher(getLoginFormUrl()).forward(request, response);
         }
     }
 
