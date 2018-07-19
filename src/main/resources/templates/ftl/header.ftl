@@ -1,0 +1,36 @@
+<#import "base.ftl" as ListPage>
+<#macro Html title="" css="">
+    <@ListPage.Html title="${title}" css="${css}">
+<div class="page-wrapper">
+    <header>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#header-navbar-collapse">
+                        <span class="sr-only">切换导航</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">杭州伟驰科技有限公司</a>
+                </div>
+                <div class="collapse navbar-collapse" id="header-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">网站首页</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">公司介绍</a></li>
+                            <li><a href="#">荣誉资质</a></li>
+                        </ul>
+                        <li><a href="#">新闻中心</a></li>
+                        <li><a href="#">新品介绍</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <#nested>
+</div>
+    </@ListPage.Html>
+</#macro>
