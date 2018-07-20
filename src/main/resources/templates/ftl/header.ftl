@@ -17,19 +17,11 @@
                 </div>
                 <div class="collapse navbar-collapse" id="header-navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">网站首页</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                公司介绍<b class="caret"></b>
-                            </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">公司介绍</a></li>
-                            <li><a href="#">荣誉资质</a></li>
-                        </ul>
-                        </li>
-                        <li><a href="#">新闻中心</a></li>
-                        <li><a href="#">新品介绍</a></li>
-                        <li><a href="#">联系我们</a></li>
+                        <li <#if activeFlag="index" >class="active"</#if> ><a href="/index">网站首页</a></li>
+                        <li <#if activeFlag="aboutUs" >class="active"</#if>><a href="/aboutUs">公司介绍</a></li>
+                        <li <#if activeFlag="news" >class="active"</#if> ><a href="/news">新闻中心</a></li>
+                        <li <#if activeFlag="product" >class="active"</#if> ><a href="/product">新品介绍</a></li>
+                        <li <#if activeFlag="contact" >class="active"</#if> ><a href="/contact">联系我们</a></li>
                     </ul>
                 </div>
             </div>
