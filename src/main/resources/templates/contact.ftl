@@ -32,7 +32,7 @@
 <script type="text/javascript">
     // 百度地图API功能
     var map = new BMap.Map("allmap");    // 创建Map实例
-    var point = new BMap.Point(116.404, 39.915); // 初始化地图,设置中心点坐标和地图级别
+    var point = new BMap.Point(120.224788, 30.257314); // 初始化地图,设置中心点坐标和地图级别
     map.centerAndZoom(point, 15);
     var marker = new BMap.Marker(point);        // 创建标注
     map.addOverlay(marker);                     // 将标注添加到地图中
@@ -43,15 +43,15 @@
             BMAP_HYBRID_MAP
         ]
     }));
-    map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+    map.setCurrentCity("杭州");          // 设置地图显示的城市 此项是必须设置的
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
     //添加信息窗口
     var opts = {
-        width: 200,     // 信息窗口宽度
-        height: 100,     // 信息窗口高度
+        width: 100,     // 信息窗口宽度
+        height: 50,     // 信息窗口高度
         title: "杭州伟驰科技有限公司" // 信息窗口标题
     }
-    var infoWindow = new BMap.InfoWindow("地址：北京市东城区王府井大街88号乐天银泰百货八层", opts);  // 创建信息窗口对象
+    var infoWindow = new BMap.InfoWindow("", opts);  // 创建信息窗口对象
     map.openInfoWindow(infoWindow, point); //开启信息窗口
 </script>
 ​
