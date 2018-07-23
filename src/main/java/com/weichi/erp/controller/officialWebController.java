@@ -40,4 +40,12 @@ public class officialWebController {
         return "aboutUs";
     }
 
+    @RequestMapping("/productInfo")
+    public String productInfo(Map<String, Object> map) {
+        map.put("activeFlag", "product");
+        return "productInfo";
+    }
+
+
+
 }

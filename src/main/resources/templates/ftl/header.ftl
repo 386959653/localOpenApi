@@ -19,7 +19,7 @@
                     <ul class="nav navbar-nav">
                         <li <#if activeFlag="index" >class="active"</#if> ><a href="/index">网站首页</a></li>
                         <li <#if activeFlag="aboutUs" >class="active"</#if>><a href="/aboutUs">公司介绍</a></li>
-                        <li <#if activeFlag="news" >class="active"</#if> ><a href="/news">新闻中心</a></li>
+                    <#--<li <#if activeFlag="news" >class="active"</#if> ><a href="/news">新闻中心</a></li>-->
                         <li <#if activeFlag="product" >class="active"</#if> ><a href="/product">新品介绍</a></li>
                         <li <#if activeFlag="contact" >class="active"</#if> ><a href="/contact">联系我们</a></li>
                     </ul>
