@@ -6,7 +6,8 @@
     <p class="text-right"><span STYLE="background-color: floralwhite">2018-04-02</span></p>
     <hr>
     <p>基于人工智能与高可靠实验数据与经典文献，为用户提供诉求与疾病的科学食疗方案、补充剂的真实作用，以及强大全面而直观的食物营养成分与营养工具。</p>
-    <img STYLE="width: 100%" src="https://faxian.appinn.com/wp-content/uploads/2018/07/Image-1-1024x574.png">
+    <img class="img-responsive img-rounded"
+         src="https://faxian.appinn.com/wp-content/uploads/2018/07/Image-1-1024x574.png">
     <hr>
     <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone"
                                                                                       data-cmd="qzone"

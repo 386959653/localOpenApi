@@ -5,13 +5,15 @@
     <div class="row">
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title">唤醒食物</h3>
+                <a href="/productInfo">
+                    <h3 class="panel-title"><strong>唤醒食物</strong></h3>
+                </a>
             </div>
             <div class="panel-body">
                 <div class=" col-lg-3">
                     <a href="/productInfo">
-                    <img width="100%" height="160"
-                         src="https://faxian.appinn.com/wp-content/uploads/2018/07/Image-1-245x160.png">
+                        <img class="img-responsive img-thumbnail"
+                             src="https://faxian.appinn.com/wp-content/uploads/2018/07/Image-1-245x160.png">
                     </a>
                 </div>
                 <div class=" col-lg-9">
