@@ -31,7 +31,7 @@
 <div class="container">
     <div class="row">
         <h3 class="text-center"><STRONG>简单可靠</STRONG></h3>
-        <p class="text-muted text-center">杭州伟驰科技有限公司，是一家技术导向型软件科技公司，专注开发各种小而美的软件。</p>
+        <p class="text-muted text-center">杭州伟驰科技有限公司，是一家技术导向型软件科技公司，专注开发各种小而美的软件系统。</p>
     </div>
 </div>
 </@ListPage.Html>
