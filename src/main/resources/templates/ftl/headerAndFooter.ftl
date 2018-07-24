@@ -28,6 +28,11 @@
         </nav>
     </header>
     <#nested>
+    <footer>
+        <div class="well text-center" style="background-color: #9d9d9d  ;color: floralwhite">Copyright © 2018 杭州伟驰科技有限公司
+            All rights reserved
+        </div>
+    </footer>
 </div>
     </@ListPage.Html>
 </#macro>

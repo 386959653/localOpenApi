@@ -1,4 +1,4 @@
-<#import "ftl/header.ftl" as ListPage>
+<#import "ftl/headerAndFooter.ftl" as ListPage>
 
 <@ListPage.Html title="杭州伟驰科技有限公司 - 联系我们">
 <div class="container">
