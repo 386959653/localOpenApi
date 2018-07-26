@@ -10,12 +10,12 @@
     <!-- 轮播（Carousel）项目 -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="https://www.elite-clock.com/uploadfile/bannerimg/15184221212114217928.jpg" alt="First slide">
-            <div class="carousel-caption">标题 1</div>
+            <img src="../img/carousel_1920x746/webDev.jpeg" alt="First slide">
+            <div class="carousel-caption"><STRONG>网站开发</STRONG></div>
         </div>
         <div class="item">
-            <img src="https://www.elite-clock.com/uploadfile/bannerimg/15223112587458217928.jpg" alt="Second slide">
-            <div class="carousel-caption">标题 2</div>
+            <img src="../img/carousel_1920x746/seo.jpg" alt="Second slide">
+            <div class="carousel-caption"><STRONG>搜索引擎优化</STRONG></div>
         </div>
     </div>
     <!-- 轮播（Carousel）导航 -->

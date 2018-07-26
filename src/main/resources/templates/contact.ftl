@@ -25,7 +25,7 @@
     <HR>
     <!--百度地图容器-->
     <div class="row">
-        <div id="allmap" class="col-sm-12 col-lg-12" style=" user-select: none; height: 390px;"></div>
+        <div id="allmap" class="col-xs-10 col-lg-10 col-xs-offset-1" style=" user-select: none; height: 390px;"></div>
     </div>
 </div>
 
