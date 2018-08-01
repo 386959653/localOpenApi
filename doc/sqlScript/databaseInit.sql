@@ -115,3 +115,68 @@ insert  into `user_role`(`id`,`user_id`,`role_id`,`insert_username`,`insert_time
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+drop table if exists carousel;
+
+drop table if exists contact;
+
+drop table if exists product;
+
+/*==============================================================*/
+/* Table: carousel                                              */
+/*==============================================================*/
+create table carousel
+(
+  id              bigint not null
+  comment '主键',
+  img_name        varchar(100) comment '图片名称',
+  img_url         varchar(2083) comment '图片地址',
+  insert_username varchar(100) comment 'insert_username',
+  insert_time     datetime comment 'insert_time',
+  update_username varchar(100) comment 'update_username',
+  update_time     datetime comment 'update_time'
+);
+
+alter table carousel
+  comment '轮播图表';
+
+/*==============================================================*/
+/* Table: contact                                               */
+/*==============================================================*/
+create table contact
+(
+  id              bigint not null
+  comment '主键',
+  qq              varchar(50) comment 'QQ',
+  email           varchar(100) comment 'email',
+  city            varchar(50) comment '所在城市',
+  detail_address  varchar(500) comment '详细地址',
+  gps_address     varchar(100) comment '经纬度',
+  insert_username varchar(100) comment 'insert_username',
+  insert_time     datetime comment 'insert_time',
+  update_username varchar(100) comment 'update_username',
+  update_time     datetime comment 'update_time'
+);
+
+alter table contact
+  comment '联系表';
+
+/*==============================================================*/
+/* Table: product                                               */
+/*==============================================================*/
+create table product
+(
+  id               bigint not null
+  comment '主键',
+  product_name     varchar(100) comment '产品名称',
+  product_abstract varchar(2000) comment '产品简介',
+  thumbnail_url    varchar(2083) comment '产品缩略图地址',
+  product_detail   varchar(16383) comment '产品详情，最大长度16383字符',
+  insert_username  varchar(100) comment 'insert_username',
+  insert_time      datetime comment 'insert_time',
+  update_username  varchar(100) comment 'update_username',
+  update_time      datetime comment 'update_time'
+);
+
+alter table product
+  comment '产品表';

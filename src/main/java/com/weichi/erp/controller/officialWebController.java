@@ -1,8 +1,10 @@
 package com.weichi.erp.controller;
 
+import com.weichi.erp.domain.Carousel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,6 +14,9 @@ import java.util.Map;
 public class officialWebController {
     @RequestMapping("/index")
     public String index(Map<String, Object> map) {
+        Carousel carousel = new Carousel();
+        List<Carousel> carouselList = carousel.selectAll();
+        map.put("carouselList", carouselList);
         map.put("activeFlag", "index");
         return "index";
     }
