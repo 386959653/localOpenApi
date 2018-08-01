@@ -148,7 +148,9 @@ create table contact
   id              bigint not null
   comment '主键',
   qq              varchar(50) comment 'QQ',
-  email           varchar(100) comment 'email',
+  qq_descp        varchar(200) comment 'QQ说明',
+  email           varchar(200) comment 'email',
+  email_descp     varchar(200) comment 'email说明',
   city            varchar(50) comment '所在城市',
   detail_address  varchar(500) comment '详细地址',
   gps_address     varchar(100) comment '经纬度',
@@ -160,6 +162,7 @@ create table contact
 
 alter table contact
   comment '联系表';
+
 
 /*==============================================================*/
 /* Table: product                                               */

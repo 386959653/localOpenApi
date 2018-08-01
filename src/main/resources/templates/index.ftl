@@ -1,6 +1,6 @@
 <#import "ftl/headerAndFooter.ftl" as ListPage>
 
-<@ListPage.Html title="杭州伟驰科技有限公司 - 首页">
+<@ListPage.Html title="${companyName?if_exists} - 首页">
 <div id="myCarousel" class="carousel slide">
     <!-- 轮播（Carousel）指标 -->
     <ol class="carousel-indicators" style="
@@ -33,7 +33,7 @@
 <div class="container">
     <div class="row">
         <h3 class="text-center"><STRONG>简单可靠</STRONG></h3>
-        <p class="text-muted text-center">杭州伟驰科技有限公司，是一家技术导向型软件科技公司，专注开发各种小而美的软件系统。</p>
+        <p class="text-muted text-center">${companyName?if_exists}，是一家技术导向型软件科技公司，专注开发各种小而美的软件系统。</p>
     </div>
 </div>
 </@ListPage.Html>

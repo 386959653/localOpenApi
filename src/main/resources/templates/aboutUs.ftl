@@ -1,11 +1,11 @@
 <#import "ftl/headerAndFooter.ftl" as ListPage>
 
-<@ListPage.Html title="杭州伟驰科技有限公司 - 公司介绍">
+<@ListPage.Html title="${companyName?if_exists} - 公司介绍">
 <div class="container">
     <div class="row well">
         <div class="col-md-7 col-md-offset-2">
             <p style="text-align:center; line-height: 36px">
-                <span class="badge" style="background-color: orangered">杭州伟驰科技有限公司</span>
+                <span class="badge" style="background-color: orangered">${companyName?if_exists}</span>
                 创立于“上有天堂，下有苏杭”美誉的浙江省会城市杭州，<br>
                 致力于高端网站开发、<br>H5响应式网站建设、<br>各种软件管理系统设计、<br>微信小程序开发<br>
                 及相关软件产品的定制化服务。

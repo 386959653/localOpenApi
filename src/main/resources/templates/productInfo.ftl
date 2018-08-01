@@ -1,14 +1,15 @@
 <#import "ftl/headerAndFooter.ftl" as ListPage>
 
-<@ListPage.Html title="杭州伟驰科技有限公司 - 唤醒食物">
+<@ListPage.Html title="${companyName?if_exists} - 唤醒食物">
 <div class="container">
-    <h1>唤醒食物</h1>
-    <p class="text-right"><span STYLE="background-color: floralwhite">2018-04-02</span></p>
+    <h1>${product.productName?if_exists}</h1>
+    <p class="text-right"><span
+            STYLE="background-color: floralwhite">${product.updateTime?if_exists?string('yyyy-MM-dd')}</span></p>
     <hr>
-    <p>基于人工智能与高可靠实验数据与经典文献，为用户提供诉求与疾病的科学食疗方案、补充剂的真实作用，以及强大全面而直观的食物营养成分与营养工具。</p>
-    <img class="img-responsive img-rounded"
-         src="https://faxian.appinn.com/wp-content/uploads/2018/07/Image-1-1024x574.png">
-    <hr>
+<#--用户编辑的正文内容-->
+    ${product.productDetail?if_exists}
+
+<#--百度分享api-->
     <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone"
                                                                                       data-cmd="qzone"
                                                                                       title="分享到QQ空间"></a><a href="#"
@@ -21,8 +22,9 @@
                                                                                                  data-cmd="weixin"
                                                                                                  title="分享到微信"></a>
     </div>
-</div>
 
+</div>
+<#--百度分享api-->
 <script>window._bd_share_config = {
     "common": {
         "bdSnsKey": {},

@@ -13,7 +13,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/index">杭州伟驰科技有限公司</a>
+                    <a class="navbar-brand" href="/index">${companyName?if_exists}</a>
                 </div>
                 <div class="collapse navbar-collapse" id="header-navbar-collapse">
                     <ul class="nav navbar-nav">
@@ -29,7 +29,8 @@
     </header>
     <#nested>
     <footer>
-        <div class="well text-center" style="background-color: #9d9d9d  ;color: floralwhite">Copyright © 2018 杭州伟驰科技有限公司
+        <div class="well text-center" style="background-color: #9d9d9d  ;color: floralwhite">Copyright ©
+            2018 ${companyName?if_exists}
             All rights reserved
         </div>
     </footer>
