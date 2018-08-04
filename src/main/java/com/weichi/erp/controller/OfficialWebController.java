@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by Wewon on 2018/7/19.
  */
 @Controller
-public class officialWebController {
+public class OfficialWebController {
     @RequestMapping("/index")
     public String index(Map<String, Object> map) {
         Carousel carousel = new Carousel();

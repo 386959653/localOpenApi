@@ -1,4 +1,4 @@
-<#macro Html title="" css="">
+<#macro Html title="" css="" headAttr="" bodyAttr="">
 
 <!DOCTYPE HTML>
 <html>
@@ -40,12 +40,14 @@
         })();
     </script>
 
+    ${headAttr}
+
     <style>
             ${css}
     </style>
 </head>
 
-<body>
+<body ${bodyAttr}>
     <#nested>
 </body>
 
