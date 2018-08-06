@@ -32,6 +32,7 @@
         <div class="well text-center" style="background-color: #9d9d9d  ;color: floralwhite">Copyright ©
             2018 ${companyName?if_exists}
             All rights reserved
+            <p><a href="/dashboardController/index">后台入口</a></p>
         </div>
     </footer>
 </div>

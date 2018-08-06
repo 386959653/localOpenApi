@@ -158,8 +158,10 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-
                 <filtering>true</filtering>
+                <excludes>
+                    <exclude>static/css/adminLTE/component/font-awesome/fonts/**</exclude>
+                </excludes>
             </resource>
             <resource>
                 <!--原配置文件的目录，相对于pom.xml文件的路径-->
@@ -172,6 +174,13 @@
                 </includes>
                 <!--目标路径-->
                 <targetPath>WEB-INF</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>static/css/adminLTE/component/font-awesome/fonts/**</include>
+                </includes>
             </resource>
         </resources>
 
