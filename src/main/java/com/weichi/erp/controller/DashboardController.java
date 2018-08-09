@@ -1,8 +1,11 @@
 package com.weichi.erp.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.weichi.erp.domain.Carousel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,10 +17,10 @@ import java.util.Map;
 public class DashboardController {
     @RequestMapping("/index")
     public String index(Map<String, Object> map) {
-//        Carousel carousel = new Carousel();
-//        List<Carousel> carouselList = carousel.selectAll();
-//        map.put("carouselList", carouselList);
-//        map.put("activeFlag", "index");
+        Carousel carousel = new Carousel();
+        List<Carousel> carouselList = carousel.selectAll();
+        map.put("carouselList", JSON.toJSONString(carouselList));
+        map.put("activeFlag", "index");
         return "dashboard/index";
     }
 

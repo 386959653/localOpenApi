@@ -1,6 +1,6 @@
 <#import "base.ftl" as ListPage>
-<#macro Html title="" css="">
-    <@ListPage.Html title="${title}" css="${css}">
+<#macro Html title="" css="" headAttr="">
+    <@ListPage.Html title="${title}" css="${css}" headAttr='${headAttr}'>
 <div class="page-wrapper">
     <header>
         <nav class="navbar navbar-default" role="navigation">

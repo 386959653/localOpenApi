@@ -9,10 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>${title}</title>
+<#--jquery文件-->
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -25,9 +27,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
     <script src="../js/dialog.js"></script>
     <script src="../js/utils.js"></script>
-    <!--引用百度地图API-->
-    <script type="text/javascript"
-            src="http://api.map.baidu.com/api?v=2.0&ak=M5FEI32V9dDwpsrTbN9lU92xOf9vpYCK"></script>
+
 
     <!--引用百度统计-->
     <script>

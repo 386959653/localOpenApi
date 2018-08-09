@@ -1,10 +1,10 @@
 <#import "../../ftl/base.ftl" as ListPage>
-<#macro Html title="" css="">
+<#macro Html title="" css="" headAttr="">
     <@ListPage.Html title="${title}" css="${css}"
     headAttr='<link rel="stylesheet" href="../../../css/adminLTE/AdminLTE.min.css" type="text/css"/>
 <link rel="stylesheet" href="../../../css/adminLTE/skins/_all-skins.min.css" type="text/css"/>
 <link rel="stylesheet" href="../../../css/adminLTE/component/font-awesome/css/font-awesome.css" type="text/css"/>
-'
+${headAttr}'
     bodyAttr='class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;"'>
         <div class="wrapper">
 
@@ -40,7 +40,9 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu tree" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
-                        <li><a href="../dashboardController/index"><i class="fa fa-book"></i> <span>Documentation</span></a>
+                        <li><a href="../dashboardController/index"><i class="fa fa-picture-o"></i> <span>设置首页</span></a>
+                        <li><a href="../dashboardController/index"><i class="fa fa-product-hunt"></i> <span>设置产品</span></a>
+                        <li><a href="../dashboardController/index"><i class="fa fa-phone"></i> <span>设置联系方式</span></a>
                         </li>
 
                     </ul>

@@ -183,3 +183,21 @@ create table product
 
 alter table product
   comment '产品表';
+
+ALTER TABLE product
+  ADD PRIMARY KEY (id);
+ALTER TABLE contact
+  ADD PRIMARY KEY (id);
+ALTER TABLE carousel
+  ADD PRIMARY KEY (id);
+ALTER TABLE `officialWeb`.`carousel`
+  ADD COLUMN `img_link` VARCHAR(2083) NULL
+COMMENT '图片链接'
+  AFTER `img_url`,
+  ADD COLUMN `enable_flag` VARCHAR(1) NULL
+COMMENT '启用标志(Y/N)'
+  AFTER `img_link`;
+alter table `officialWeb`.`carousel`
+  ADD COLUMN `order_num` int NULL
+COMMENT '排序字段'
+  AFTER `enable_flag`;
