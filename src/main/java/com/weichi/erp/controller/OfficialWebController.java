@@ -1,5 +1,7 @@
 package com.weichi.erp.controller;
 
+import com.baomidou.mybatisplus.mapper.Condition;
+import com.weichi.erp.Constant.CarouselEnums;
 import com.weichi.erp.domain.Carousel;
 import com.weichi.erp.domain.Contact;
 import com.weichi.erp.domain.Product;
@@ -18,7 +20,7 @@ public class OfficialWebController {
     @RequestMapping("/index")
     public String index(Map<String, Object> map) {
         Carousel carousel = new Carousel();
-        List<Carousel> carouselList = carousel.selectAll();
+        List<Carousel> carouselList = carousel.selectList(Condition.create().eq("enable_flag", CarouselEnums.enableFlag.Y).orderBy("order_num"));
         map.put("carouselList", carouselList);
         map.put("activeFlag", "index");
         return "index";

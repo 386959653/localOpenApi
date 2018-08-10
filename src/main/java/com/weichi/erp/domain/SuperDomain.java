@@ -1,5 +1,6 @@
 package com.weichi.erp.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.enums.FieldFill;
@@ -21,6 +22,29 @@ public class SuperDomain<T extends Model> extends Model<T> {
     private Date updateTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateUsername;
+    //    slickGrid自带字段
+    @TableField(exist = false)
+    @JSONField(name = "_state")
+    private String state;
+    @TableField(exist = false)
+    @JSONField(name = "_no_")
+    private String no;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
 
     public String getInsertUsername() {
         return insertUsername;

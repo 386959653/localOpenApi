@@ -40,9 +40,12 @@ ${headAttr}'
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu tree" data-widget="tree">
                         <li class="header">MAIN NAVIGATION</li>
-                        <li><a href="../dashboardController/index"><i class="fa fa-picture-o"></i> <span>设置首页</span></a>
-                        <li><a href="../dashboardController/index"><i class="fa fa-product-hunt"></i> <span>设置产品</span></a>
-                        <li><a href="../dashboardController/index"><i class="fa fa-phone"></i> <span>设置联系方式</span></a>
+                        <li <#if activeFlag="index" >class="active"</#if> ><a href="index"><i
+                                class="fa fa-picture-o"></i> <span>设置首页</span></a>
+                        <li <#if activeFlag="product" >class="active"</#if> ><a href="product"><i
+                                class="fa fa-product-hunt"></i> <span>设置产品</span></a>
+                        <li <#if activeFlag="contact" >class="active"</#if> ><a href="contact"><i
+                                class="fa fa-phone"></i> <span>设置联系方式</span></a>
                         </li>
 
                     </ul>

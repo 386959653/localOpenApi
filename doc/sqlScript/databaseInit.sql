@@ -201,3 +201,8 @@ alter table `officialWeb`.`carousel`
   ADD COLUMN `order_num` int NULL
 COMMENT '排序字段'
   AFTER `enable_flag`;
+
+ALTER TABLE carousel
+  MODIFY enable_flag enum ("Y", "N") COMMENT '启用标志(Y/N)';
+ALTER TABLE carousel
+  ALTER COLUMN enable_flag SET DEFAULT "N";

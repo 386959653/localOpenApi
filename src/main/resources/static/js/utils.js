@@ -302,13 +302,16 @@ var AjaxHelper = (function () {
     function post(url, data, callback, async) {
         var succeed = true;
         if (jQuery.isFunction(data)) {
-            async = async || callback;
+            async = async || callback || false;
             callback = data;
             data = undefined;
+        } else {
+            data = JSON.stringify(data);
         }
         $.ajax({
             type: 'POST',
             dataType: "json",
+            contentType: "application/json;charset=UTF-8",
             url: url,
             data: data,
             cache: false,

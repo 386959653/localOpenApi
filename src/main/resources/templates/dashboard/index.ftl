@@ -23,11 +23,29 @@
 css=''
 
 >
+<form action='index' id="hideForm">
 
-
-    <div style="width:600px;">
-        <div id="myGrid" style="width:100%;height:500px;"></div>
+</form>
+<section class="content">
+    <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 ">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">设置轮播图</h3>
+                </div>
+                <div class="box-body" style="">
+                    <div id="myGrid" style="width:100%;height:250px;"></div>
     </div>
+                <div class="box-footer clearfix ">
+                    <button id="save" type="button" class="btn btn-default"><i class="fa fa-plus"></i> 保存</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+
 
     <script>
         function requiredFieldValidator(value) {
@@ -93,12 +111,28 @@ css=''
             }
         });
 
+        $('#save').click(function () {
+            grid.getEditController().commitCurrentEdit();
+            var url = "carouselSave";
+            var data = editor.getChanged();
+
+            if (data.length > 0) {
+                AjaxHelper.post(url, data, function (data) {
+                    if (data.status == "ok") {
+                        alert("保存成功");
+                        $('#hideForm').submit();
+                    }
+                });
+            }
+
+
+        });
+
         $(function () {
             grid = new Slick.Grid("#myGrid", new Slick.Data.Model({"data": data}), columns, options);
             grid.registerPlugin(editor);
             grid.setSelectionModel(new Slick.CellSelectionModel());
             grid.init();
-
-        })
+        });
     </script>
 </@ListPage.Html>
