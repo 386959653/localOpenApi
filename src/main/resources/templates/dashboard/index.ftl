@@ -155,10 +155,42 @@ css='
             $('#confirmModal').modal('toggle');
             var rows = grid.getSelectedRows();
             grid.getEditController().commitCurrentEdit();
-            $(".loading").toggle();
+
+            var del_all_ids = new Array();
+            var del_db_ids = new Array();
+            $.each(rows, function (idx, row) {
+                var item = editor.getGrid().getDataItem(row);
+                del_all_ids.push(item.id);
+                if (item._state != 'added') {
+                    del_db_ids.push(item.id);
+                }
+            });
+
+            // var data = {
+            //     'delDtlIds' : JSON.stringify(del_db_ids)
+            // };
+            var url = 'carouselDel';
+
+            AjaxHelper.post(url, del_db_ids, function (response) {
+                $(".loading").toggle();
+                if (response.status == "ok") {
+                    $.each(del_all_ids, function (idx, _id) {
+                        var _idx = editor.getIndex("id", _id);
+                        editor.removeItem(_idx);
+                        grid.setSelectedRows([]);//去掉默认勾选
+                    });
+                    $('#tipModal').find('.modal-body').html("删除成功！");
+                    $('#tipModal').modal('toggle');
+                    $('#hideForm').submit();
+                } else {
+                    $('#errorModal').find('.modal-body').html(response.message);
+                    $('#errorModal').modal('toggle');
+                }
+            });
         });
 
         $('#delete').click(function () {
+            <@com.RETURN_NO_ROW "grid" />
             $('#confirmModal').modal('toggle');
 
 

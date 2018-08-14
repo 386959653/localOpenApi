@@ -50,6 +50,21 @@ public class DashboardController {
         return jsonResult;
     }
 
+    @ResponseBody
+    @RequestMapping("/carouselDel")
+    public JsonResult<?> carouselDel(@RequestBody List<Long> carouselIdList) {
+        JsonResult jsonResult = new JsonResult();
+        try {
+            Carousel carousel = new Carousel();
+            carousel.delete(Condition.create().in("id", carouselIdList));
+        } catch (Exception e) {
+            jsonResult.setStatus(JsonResult.ERROR);
+            e.printStackTrace();
+        }
+
+        return jsonResult;
+    }
+
     @RequestMapping("/product")
     public String product(Map<String, Object> map) {
         Product product = new Product();

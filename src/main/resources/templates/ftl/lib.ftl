@@ -27,3 +27,14 @@
     </div><!-- /.modal -->
 </div>
 </#macro>
+
+<#macro RETURN_NO_ROW grid tip="请选择操作对象。">
+<#--点击放大镜的cell，但没有选数据，表格数据为0也要报错-->
+var rows2 = ${grid}.getDataLength();
+  var rows = ${grid}.getSelectedRows();
+  if (rows.length == 0 || rows2 == 0){
+$('#tipModal').find('.modal-body').html("${tip}");
+$('#tipModal').modal('toggle');
+    return false;
+  }
+</#macro>

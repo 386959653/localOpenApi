@@ -49,7 +49,8 @@
 
 
 <body ${bodyAttr}>
-    <@com.MY_MODAL id="ajaxErrorModal" title="错误消息"/>
+    <@com.MY_MODAL id="errorModal" title="错误消息"/>
+    <@com.MY_MODAL id="tipModal" title="提示消息"/>
 <div class="loading" style="display: none;">
     <i class="fa fa-refresh fa-spin"></i>
 </div>
