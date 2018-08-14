@@ -3,11 +3,9 @@
     <@ListPage.Html title="${title}" css="${css}"
     headAttr='<link rel="stylesheet" href="../../../css/adminLTE/AdminLTE.min.css" type="text/css"/>
 <link rel="stylesheet" href="../../../css/adminLTE/skins/_all-skins.min.css" type="text/css"/>
-<link rel="stylesheet" href="../../../css/adminLTE/component/font-awesome/css/font-awesome.css" type="text/css"/>
 ${headAttr}'
     bodyAttr='class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;"'>
         <div class="wrapper">
-
             <header class="main-header">
                 <!-- Logo -->
                 <a href="../../index" class="logo">

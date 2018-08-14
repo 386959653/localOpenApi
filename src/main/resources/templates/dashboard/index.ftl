@@ -1,4 +1,5 @@
 <#import "ftl/sidebar.ftl" as ListPage>
+<#--<#import "../ftl/lib.ftl" as com>-->
 
 <@ListPage.Html title="${companyName?if_exists}后台 - 首页" headAttr='
 <link rel="stylesheet" href="../../js/slickGrid/slick.grid.css" type="text/css"/>
@@ -11,18 +12,26 @@
 <script src="../../js/slickGrid/slick.core.js"></script>
 <script src="../../js/slickGrid/plugins/slick.cellrangedecorator.js"></script>
 <script src="../../js/slickGrid/plugins/slick.cellrangeselector.js"></script>
-<script src="../../js/slickGrid/plugins/slick.cellselectionmodel.js"></script>
+<script src="../../js/slickGrid/plugins/slick.rowselectionmodel.js"></script>
 <script src="../../js/slickGrid/slick.formatters.js"></script>
 <script src="../../js/slickGrid/slick.grid.js"></script>
 <!--编辑表格要用到的-->
 <script src="../../js/slickGrid/slick.editors.js"></script>
 <script src="../../js/slickGrid/plugins/slick.model.js"></script>
 <script src="../../js/slickGrid/plugins/slick.editmanager.js"></script>
+<script src="../../js/slickGrid/plugins/slick.checkboxselectcolumn.js"></script>
 
 '
-css=''
+css='
+.slick-cell-checkboxsel {
+      background: #f0f0f0;
+      border-right-color: silver;
+      border-right-style: solid;
+    }
+'
 
 >
+    <@com.MY_MODAL content="test"/>
 <form action='index' id="hideForm">
 
 </form>
@@ -38,13 +47,16 @@ css=''
                     <div id="myGrid" style="width:100%;height:250px;"></div>
     </div>
                 <div class="box-footer clearfix ">
+                    <button id="delete" type="button" class="btn btn-default"><i class="fa fa-minus"></i> 删除选中行</button>
                     <button id="save" type="button" class="btn btn-default"><i class="fa fa-plus"></i> 保存</button>
                 </div>
             </div>
         </section>
     </div>
 </section>
-
+    <@com.MY_MODAL id="confirmModal" content="确认删除吗？" />
+    <@com.MY_MODAL id="saveModal" content="确认保存吗？" />
+    <@com.MY_MODAL id="saveTipModal" title="提示信息" content="保存成功！" />
 
 
     <script>
@@ -66,8 +78,12 @@ css=''
         }
 
         var grid;
+        var checkboxSelector = new Slick.CheckboxSelectColumn({
+            cssClass: "slick-cell-checkboxsel"
+        });
         var data = ${carouselList};
         var columns = [
+            checkboxSelector.getColumnDefinition(),
             {
                 id: "imgName",
                 name: "图片名称",
@@ -111,19 +127,52 @@ css=''
             }
         });
 
-        $('#save').click(function () {
+        $('#saveModalConfirm').click(function () {
+            $('#saveModal').modal('toggle');
+            $(".loading").toggle();
             grid.getEditController().commitCurrentEdit();
             var url = "carouselSave";
             var data = editor.getChanged();
 
             if (data.length > 0) {
                 AjaxHelper.post(url, data, function (data) {
+                    $(".loading").toggle();
                     if (data.status == "ok") {
-                        alert("保存成功");
+                        $('#saveTipModal').modal('toggle');
                         $('#hideForm').submit();
                     }
                 });
+            } else {
+                $(".loading").toggle();
             }
+        });
+
+        $('#save').click(function () {
+            $('#saveModal').modal('toggle');
+        });
+
+        $('#confirmModalConfirm').click(function () {
+            $('#confirmModal').modal('toggle');
+            var rows = grid.getSelectedRows();
+            grid.getEditController().commitCurrentEdit();
+            $(".loading").toggle();
+        });
+
+        $('#delete').click(function () {
+            $('#confirmModal').modal('toggle');
+
+
+            // var url = "carouselSave";
+            // var data = editor.getChanged();
+            //
+            // if (data.length > 0) {
+            //     AjaxHelper.post(url, data, function (data) {
+            //         if (data.status == "ok") {
+            //             alert("保存成功");
+            //             $('#hideForm').submit();
+            //         }
+            //     });
+            // }
 
 
         });
@@ -131,7 +180,8 @@ css=''
         $(function () {
             grid = new Slick.Grid("#myGrid", new Slick.Data.Model({"data": data}), columns, options);
             grid.registerPlugin(editor);
-            grid.setSelectionModel(new Slick.CellSelectionModel());
+            grid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
+            grid.registerPlugin(checkboxSelector);
             grid.init();
         });
     </script>

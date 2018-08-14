@@ -37,9 +37,9 @@ public class DashboardController {
         JsonResult jsonResult = new JsonResult();
         try {
             for (Carousel carousel : carouselList)
-                if (carousel.getState().equals(SuperDomainEnums.state.modified)) {
+                if (carousel.getState().equals(SuperDomainEnums.state.modified.name())) {
                     carousel.updateById();
-                } else if (carousel.getState().equals(SuperDomainEnums.state.added)) {
+                } else if (carousel.getState().equals(SuperDomainEnums.state.added.name())) {
                     carousel.insert();
                 }
         } catch (Exception e) {
