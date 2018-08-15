@@ -55,6 +55,20 @@
     <i class="fa fa-refresh fa-spin"></i>
 </div>
     <#nested>
+<script>
+    var errorModal = new Vue({
+        el: '#errorModal',
+        data: {
+            content: ''
+        }
+    });
+    var tipModal = new Vue({
+        el: '#tipModal',
+        data: {
+            content: ''
+        }
+    });
+</script>
 </body>
 
 </html>
