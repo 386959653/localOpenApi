@@ -1,5 +1,5 @@
 <#import "ftl/sidebar.ftl" as ListPage>
-<#--<#import "../ftl/lib.ftl" as com>-->
+<#import "../ftl/lib.ftl" as com>
 
 <@ListPage.Html title="${companyName?if_exists}后台 - 首页" headAttr='
 <link rel="stylesheet" href="../../js/slickGrid/slick.grid.css" type="text/css"/>
@@ -20,6 +20,9 @@
 <script src="../../js/slickGrid/plugins/slick.model.js"></script>
 <script src="../../js/slickGrid/plugins/slick.editmanager.js"></script>
 <script src="../../js/slickGrid/plugins/slick.checkboxselectcolumn.js"></script>
+<#--webUploader文件上传组件-->
+<link rel="stylesheet" href="../../css/webUploader.css" type="text/css"/>
+<script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.js"></script>
 
 '
 css='
@@ -37,18 +40,33 @@ css='
 </form>
 <section class="content">
     <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-7 ">
+        <section class="col-lg-12 ">
+        <#--表格-->
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">设置轮播图</h3>
                 </div>
                 <div class="box-body" style="">
-                    <div id="myGrid" style="width:100%;height:250px;"></div>
+                <#--表格宽度为所有列宽度加30px-->
+                    <div id="myGrid" style="width:550px;height:250px;"></div>
     </div>
                 <div class="box-footer clearfix ">
                     <button id="delete" type="button" class="btn btn-default"><i class="fa fa-minus"></i> 删除选中行</button>
                     <button id="save" type="button" class="btn btn-default"><i class="fa fa-plus"></i> 保存</button>
+                </div>
+            </div>
+
+        <#--上传图片-->
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">图片上传</h3>
+                </div>
+                <div class="box-body" style="">
+                    <!--用来存放item-->
+                    <div id="fileList" class="uploader-list"></div>
+                </div>
+                <div class="box-footer clearfix ">
+                    <div id="filePicker">选择图片</div>
                 </div>
             </div>
         </section>
@@ -166,9 +184,6 @@ css='
                 }
             });
 
-            // var data = {
-            //     'delDtlIds' : JSON.stringify(del_db_ids)
-            // };
             var url = 'carouselDel';
 
             AjaxHelper.post(url, del_db_ids, function (response) {
@@ -192,22 +207,14 @@ css='
         $('#delete').click(function () {
             <@com.RETURN_NO_ROW "grid" />
             $('#confirmModal').modal('toggle');
-
-
-            // var url = "carouselSave";
-            // var data = editor.getChanged();
-            //
-            // if (data.length > 0) {
-            //     AjaxHelper.post(url, data, function (data) {
-            //         if (data.status == "ok") {
-            //             alert("保存成功");
-            //             $('#hideForm').submit();
-            //         }
-            //     });
-            // }
-
-
         });
+
+        <@com.webUploader serverUrl="upload">
+// alert(JSON.stringify(response));
+        grid.getEditController().commitCurrentEdit();
+editor.addItem(response.data);
+grid.invalidate();
+        </@com.webUploader>
 
         $(function () {
             grid = new Slick.Grid("#myGrid", new Slick.Data.Model({"data": data}), columns, options);

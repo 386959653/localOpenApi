@@ -4,14 +4,19 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.weichi.erp.Constant.SuperDomainEnums;
 import com.weichi.erp.component.myType.JsonResult;
+import com.weichi.erp.component.utils.DateUtils;
 import com.weichi.erp.domain.Carousel;
 import com.weichi.erp.domain.Contact;
 import com.weichi.erp.domain.Product;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +85,46 @@ public class DashboardController {
         map.put("contact", contact.selectById(1L));
         map.put("activeFlag", "contact");
         return "contact";
+    }
+
+    @RequestMapping(value = "/upload")
+    @ResponseBody
+    public JsonResult<?> upload(@RequestParam("file") MultipartFile file) {
+        JsonResult jsonResult = new JsonResult();
+        try {
+            if (file.isEmpty()) {
+                jsonResult.setStatus(JsonResult.ERROR);
+                jsonResult.setMessage("文件为空");
+                return jsonResult;
+            }
+            // 获取文件名
+            String fileName = DateUtils.getMillisecondAsName();
+            String suffixName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+            String prefixName = file.getOriginalFilename().substring(0, file.getOriginalFilename().length() - suffixName.length());
+            // 设置文件存储路径
+            String projectPath = ResourceUtils.getFile("classpath:").getAbsolutePath();
+            String imgUrl = "http://localhost:8080/img/upload/" + fileName + suffixName;
+            String filePath = projectPath + File.separator + "static" + File.separator + "img" + File.separator + "upload" + File.separator;
+            String path = filePath + fileName + suffixName;
+
+            File dest = new File(path);
+            // 检测是否存在目录
+            if (!dest.getParentFile().exists()) {
+                dest.getParentFile().mkdirs();// 新建文件夹
+            }
+            file.transferTo(dest);// 文件写入
+            jsonResult.setMessage("上传成功");
+
+            Carousel carousel = new Carousel();
+            carousel.setImgName(prefixName);
+            carousel.setImgUrl(imgUrl);
+            jsonResult.setData(carousel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult.setStatus(JsonResult.ERROR);
+            jsonResult.setMessage("上传失败");
+        }
+        return jsonResult;
     }
 
 

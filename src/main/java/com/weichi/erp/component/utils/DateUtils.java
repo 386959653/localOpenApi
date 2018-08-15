@@ -84,6 +84,13 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     }
 
     /**
+     * 得到毫秒数做为文件名
+     */
+    public static String getMillisecondAsName() {
+        return formatDate(new Date(), "yyyy_MM_dd_HH_mm_ss_SSS");
+    }
+
+    /**
      * 得到当前年份字符串 格式（yyyy）
      */
     public static String getYear() {
