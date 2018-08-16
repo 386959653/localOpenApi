@@ -84,7 +84,7 @@ public class DashboardController {
         Contact contact = new Contact();
         map.put("contact", contact.selectById(1L));
         map.put("activeFlag", "contact");
-        return "contact";
+        return "dashboard/contact";
     }
 
     @RequestMapping(value = "/upload")

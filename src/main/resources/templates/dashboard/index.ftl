@@ -20,7 +20,7 @@
 <script src="../../js/slickGrid/plugins/slick.model.js"></script>
 <script src="../../js/slickGrid/plugins/slick.editmanager.js"></script>
 <script src="../../js/slickGrid/plugins/slick.checkboxselectcolumn.js"></script>
-<#--webUploader文件上传组件-->
+<!--webUploader文件上传组件-->
 <link rel="stylesheet" href="../../css/webUploader.css" type="text/css"/>
 <script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.js"></script>
 
@@ -34,7 +34,6 @@ css='
 '
 
 >
-    <@com.MY_MODAL content="test"/>
 <form action='index' id="hideForm">
 
 </form>
@@ -77,7 +76,7 @@ css='
     <@com.MY_MODAL id="saveTipModal" title="提示信息" content="保存成功！" />
 
 
-    <script>
+    <script type="text/javascript">
         function requiredFieldValidator(value) {
             if (value == null || value == undefined || !value.length) {
                 return {valid: false, msg: "This is a required field"};

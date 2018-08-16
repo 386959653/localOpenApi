@@ -71,7 +71,7 @@ jQuery(function() {
     // 当有文件添加进来的时候
     uploader.on( 'fileQueued', function( file ) {
         var $li = $(
-                '
+ '
 <div id="' + file.id + '" class="file-item thumbnail">' +
     '<img>' +
     '
@@ -80,6 +80,7 @@ jQuery(function() {
     '
 </div>'
                 ),
+
             $img = $li.find('img');
 
         $list.append( $li );
@@ -123,7 +124,8 @@ jQuery(function() {
 
         // 避免重复创建
         if ( !$error.length ) {
-            $error = $('
+            $error = $(
+'
 <div class="error"></div>').appendTo( $li );
         }
 
