@@ -550,7 +550,7 @@
             $input = $("<TEXTAREA hidefocus rows=5 style='background:white;width:250px;height:80px;border:0;outline:0'>")
                 .appendTo($wrapper);
 
-            $("<DIV style='text-align:right'><BUTTON>Save</BUTTON><BUTTON>Cancel</BUTTON></DIV>")
+            $("<DIV style='text-align:right'><BUTTON>保存</BUTTON><BUTTON>取消</BUTTON></DIV>")
                 .appendTo($wrapper);
 
             $wrapper.find("button:first").on("click", this.save);
