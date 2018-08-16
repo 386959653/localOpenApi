@@ -208,6 +208,12 @@ css='
             $('#confirmModal').modal('toggle');
         });
 
+        <@com.webUploader serverUrl="upload">
+        grid.getEditController().commitCurrentEdit();
+editor.addItem(response.data);
+grid.invalidate();
+        </@com.webUploader>
+
         $(function () {
             grid = new Slick.Grid("#myGrid", new Slick.Data.Model({"data": data}), columns, options);
             grid.registerPlugin(editor);
@@ -216,9 +222,4 @@ css='
             grid.init();
         });
     </script>
-    <@com.webUploader serverUrl="upload">
-        grid.getEditController().commitCurrentEdit();
-editor.addItem(response.data);
-grid.invalidate();
-    </@com.webUploader>
 </@ListPage.Html>

@@ -1,3 +1,5 @@
+<#--单引号或双引号后面遇到“<”格式化后会另起一行，引起js解析出错-->
+<#assign escapeString="<">
 <#macro MY_MODAL id="myModal" title="确认消息" content="" backdrop="static" keyboard="false">
 	<!-- 模态框（Modal） -->
 <div class="modal fade" id="${id}" tabindex="-1" role="dialog" aria-labelledby="myModalTitle"
@@ -30,7 +32,7 @@
 </#macro>
 
 <#macro webUploader thumbnailWidth="100" thumbnailHeight="100" serverUrl="">
-<script type="text/javascript">
+<#--<script type="text/javascript">-->
     // 图片上传demo
     jQuery(function () {
         var $ = jQuery,
@@ -73,21 +75,7 @@
 
         // 当有文件添加进来的时候
         uploader.on('fileQueued', function (file) {
-            var $li = $(
-                    '
-                    < div
-            id = "' + file.id + '"
-        class
-            = "file-item thumbnail" > ' +
-            '<img>' +
-            '
-            < div
-        class
-            = "info" > ' + file.name + ' < /div>
-            ' +
-            '
-            < /div>'
-        ),
+            var $li = $('${escapeString}div id = "' + file.id + '" class= "file-item thumbnail" > ' +'${escapeString}img>' +'${escapeString}div class= "info" > ' + file.name + ' ${escapeString}/div>' +'${escapeString}/div>');
 
             $img = $li.find('img');
 
@@ -131,7 +119,7 @@
                     $error = $li.find('div.error');
             // 避免重复创建
             if (!$error.length) {
-                $error = $('<div class="error"></div>')
+                $error = $('${escapeString}div class="error"></div>')
                         .appendTo($li);
             }
             $error.text('上传失败');
@@ -142,7 +130,6 @@
             $('#' + file.id).find('.progress').remove();
         });
     });
-</script>
 </#macro>
 
 <#macro RETURN_NO_ROW grid tip="请选择操作对象。">
