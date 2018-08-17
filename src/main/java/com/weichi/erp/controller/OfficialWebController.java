@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +46,11 @@ public class OfficialWebController {
     public String contact(Map<String, Object> map) {
         Contact contact = new Contact();
         map.put("contact", contact.selectById(1L));
+//        防止freemarker报空指针错误
+        if (map.get("contact") == null) {
+            map.put("contact", new HashMap<>());
+        }
+
         map.put("activeFlag", "contact");
         return "contact";
     }

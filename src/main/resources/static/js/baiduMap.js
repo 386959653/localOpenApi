@@ -18,8 +18,7 @@ function confirmCity() {
                 if (results.getCurrentNumPois()) {
                     if (results.getCurrentNumPois()) {
                         map.setCenter(results.getPoi(0).point, 15);
-                        $("#input_x").text(results.getPoi(0).point.lng);
-                        $("#input_y").text(results.getPoi(0).point.lat);
+                        $("#gpsAddress").text(results.getPoi(0).point.lng + "," + results.getPoi(0).point.lat);
                     }
                     exitSetCity(value);
                 }
@@ -43,8 +42,7 @@ function searchLocation() {
                 if (results.getCurrentNumPois()) {
                     map.centerAndZoom(results.getPoi(0).point, 15);
                     $("#current_city").text(results.city);
-                    $("#input_x").text(results.getPoi(0).point.lng);
-                    $("#input_y").text(results.getPoi(0).point.lat);
+                    $("#gpsAddress").text(results.getPoi(0).point.lng + "," + results.getPoi(0).point.lat);
                 }
             } else {
                 tipModal.content = "没有检索到您输入的地址";

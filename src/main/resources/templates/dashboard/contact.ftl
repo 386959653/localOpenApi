@@ -26,15 +26,19 @@ css='
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-qq" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="QQ">
-                            <textarea class="form-control" rows="3" placeholder="说明 ..."></textarea>
+                            <input type="text" class="form-control" placeholder="QQ"
+                                   value="<#if contact?? && contact.qq??> ${contact.qq}</#if>">
+                            <textarea class="form-control" rows="3"
+                                      placeholder="说明 ..."><#if contact?? && contact.qqDescp??> ${contact.qqDescp}</#if></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input type="email" class="form-control" placeholder="Email">
-                            <textarea class="form-control" rows="3" placeholder="说明 ..."></textarea>
+                            <input type="email" class="form-control" placeholder="Email"
+                                   value="<#if contact?? && contact.email??> ${contact.email}</#if>">
+                            <textarea class="form-control" rows="3"
+                                      placeholder="说明 ..."><#if contact?? && contact.emailDescp??> ${contact.emailDescp}</#if></textarea>
                         </div>
                     </div>
                 </div>
@@ -54,7 +58,8 @@ css='
                         <div class="col-lg-4">
                             <div id="setCity" style="height:26px;">
                                 <div style="display: block;">当前城市：
-                                    <span id="current_city">平阳县</span>
+                                    <span id="current_city"><#if contact?? && contact.city??> ${contact.city}<#else>
+                                        杭州</#if></span>
                                     <span style="color:#2f83c7; cursor:pointer;" id="change_city" onclick="setCity()"> 切换</span>
                                 </div>
                                 <div style="display: none;">
@@ -73,25 +78,15 @@ css='
                     </span>
                                 </div>
                                 <label class="l" style="line-height:22px"></label>
-                                <p>当前地图中心点经纬度：</p>
-                                <div style="margin-bottom:10px;">
-                                    <label class="l" style="line-height:22px">X：</label>
-                                    <div id="input_x"
-                                         style="line-height:20px; width: 110px;display:block; margin-left:30px">
-                                        120.202197
-                                    </div>
-                                </div>
-                                <div style="margin-bottom:10px;">
-                                    <label class="l" style="line-height:22px">Y：</label>
-                                    <div id="input_y" style="line-height:20px; width: 110px;margin-left: 30px;">
-                                        30.229946
-                                    </div>
-                                </div>
+                                <p>当前地图中心点经纬度：<span
+                                        id="gpsAddress"><#if contact?? && contact.gpsAddress??>${contact.gpsAddress}<#else>
+                                    120.21551,30.253082</#if></span></p>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-map-marker"
                                                                            aria-hidden="true"></i></span>
-                                        <textarea class="form-control" rows="3" placeholder="详细地址 ..."></textarea>
+                                        <textarea id="detailAddress" class="form-control" rows="3"
+                                                  placeholder="详细地址 ..."><#if contact?? && contact.detailAddress?? && contact.detailAddress?trim?length gt 0> ${contact.detailAddress}</#if></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -117,10 +112,9 @@ css='
 
 
     <script type="text/javascript">
-            <#if contact.gpsAddress??&&contact.city??>
             <#--百度地图API功能-->
     var map = new BMap.Map("allmap");    // 创建Map实例
-    var point = new BMap.Point(${contact.gpsAddress}); // 初始化地图,设置中心点坐标和地图级别
+            var point = new BMap.Point(<#if contact?? && contact.gpsAddress??>${contact.gpsAddress}<#else>120.21551, 30.253082</#if>); // 初始化地图,设置中心点坐标和地图级别
     map.centerAndZoom(point, 15);
     var marker = new BMap.Marker(point);        // 创建标注
     map.addOverlay(marker);                     // 将标注添加到地图中
@@ -131,8 +125,9 @@ css='
             BMAP_HYBRID_MAP
         ]
     }));
-    map.setCurrentCity("${contact.city}");          // 设置地图显示的城市 此项是必须设置的
+            map.setCurrentCity("<#if contact?? && contact.city??> ${contact.city}<#else>杭州</#if>");          // 设置地图显示的城市 此项是必须设置的
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+                <#if contact?? && contact.gpsAddress??&&contact.city??>
     //添加信息窗口
     var opts = {
         width: 100,     // 信息窗口宽度
@@ -141,6 +136,21 @@ css='
     }
     var infoWindow = new BMap.InfoWindow("${contact.detailAddress?if_exists}", opts);  // 创建信息窗口对象
     map.openInfoWindow(infoWindow, point); //开启信息窗口
-            </#if>
+                </#if>
+            // 点击百度地图获取地址
+            var geoc = new BMap.Geocoder();
+            map.addEventListener("click", function (e) {
+                //通过点击百度地图，可以获取到对应的point, 由point的lng、lat属性就可以获取对应的经度纬度
+                var pt = e.point;
+                geoc.getLocation(pt, function (results) {
+                    //addressComponents对象可以获取到详细的地址信息
+                    var addComp = results.addressComponents;
+                    var detailAddress = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+                    //将对应的HTML元素设置值
+                    $("#detailAddress").val(detailAddress);
+                    $("#gpsAddress").text(pt.lng + "," + pt.lat);
+                    $("#current_city").text(addComp.city);
+                });
+            });
     </script>
 </@ListPage.Html>
