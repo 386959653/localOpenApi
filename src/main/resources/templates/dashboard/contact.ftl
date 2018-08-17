@@ -113,7 +113,7 @@ css='
 
     <script type="text/javascript">
             <#--百度地图API功能-->
-    var map = new BMap.Map("allmap");    // 创建Map实例
+            var map = new BMap.Map("allmap", {enableMapClick: false});    // 创建Map实例
             var point = new BMap.Point(<#if contact?? && contact.gpsAddress??>${contact.gpsAddress}<#else>120.21551, 30.253082</#if>); // 初始化地图,设置中心点坐标和地图级别
     map.centerAndZoom(point, 15);
     var marker = new BMap.Marker(point);        // 创建标注
@@ -145,7 +145,8 @@ css='
                 geoc.getLocation(pt, function (results) {
                     //addressComponents对象可以获取到详细的地址信息
                     var addComp = results.addressComponents;
-                    var detailAddress = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+                    // var detailAddress = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+                    var detailAddress = results.address;
                     //将对应的HTML元素设置值
                     $("#detailAddress").val(detailAddress);
                     $("#gpsAddress").text(pt.lng + "," + pt.lat);
