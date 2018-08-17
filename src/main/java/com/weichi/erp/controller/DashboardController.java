@@ -56,6 +56,24 @@ public class DashboardController {
     }
 
     @ResponseBody
+    @RequestMapping("/contactSave")
+    public JsonResult<?> contactSave(@RequestBody Contact contact) {
+        JsonResult jsonResult = new JsonResult();
+        try {
+            if (contact.getId() != null) {
+                contact.updateById();
+            } else {
+                contact.insert();
+            }
+        } catch (Exception e) {
+            jsonResult.setStatus(JsonResult.ERROR);
+            e.printStackTrace();
+        }
+
+        return jsonResult;
+    }
+
+    @ResponseBody
     @RequestMapping("/carouselDel")
     public JsonResult<?> carouselDel(@RequestBody List<Long> carouselIdList) {
         JsonResult jsonResult = new JsonResult();

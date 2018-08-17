@@ -302,11 +302,13 @@ var AjaxHelper = (function () {
             cache: false,
             async: async || true,
             success: function (response) {
+                $(".loading").toggle();
                 if (Utils.isEmpty(response.status)) {
                     if (callback) callback(response);
                 }
                 else if (response.status === 'error') {
-                    alert('很遗憾', response.message, 'face-sad');
+                    errorModal.content = response.message;
+                    $('#errorModal').modal('toggle');
                     succeed = false;
                 }
                 else if (response.status === "needLogin") {
@@ -317,6 +319,7 @@ var AjaxHelper = (function () {
                 }
             },
             error: function (xhr, textStatus, thrownError) {
+                $(".loading").toggle();
                 $('#errorModal').find('.modal-body').html("<div>Http status: " + xhr.status + " "
                     + xhr.statusText + "</div>" + "<div>textStatus: "
                     + textStatus + "</div>" + "<div>thrownError:"

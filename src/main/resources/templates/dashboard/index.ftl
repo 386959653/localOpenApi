@@ -153,7 +153,6 @@ css='
 
             if (data.length > 0) {
                 AjaxHelper.post(url, data, function (data) {
-                    $(".loading").toggle();
                     if (data.status == "ok") {
                         $('#saveTipModal').modal('toggle');
                         $('#hideForm').submit();
@@ -186,7 +185,6 @@ css='
             var url = 'carouselDel';
 
             AjaxHelper.post(url, del_db_ids, function (response) {
-                $(".loading").toggle();
                 if (response.status == "ok") {
                     $.each(del_all_ids, function (idx, _id) {
                         var _idx = editor.getIndex("id", _id);
