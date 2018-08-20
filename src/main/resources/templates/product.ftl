@@ -1,6 +1,6 @@
 <#import "ftl/headerAndFooter.ftl" as ListPage>
 
-<@ListPage.Html title="${companyName?if_exists} - 新品发布">
+<@ListPage.Html title="新品发布 - ${companyName?if_exists}">
 <div class="container">
     <#list productList as item>
         <div class="row">

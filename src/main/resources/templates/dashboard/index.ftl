@@ -1,7 +1,7 @@
 <#import "ftl/sidebar.ftl" as ListPage>
 <#import "../ftl/lib.ftl" as com>
 
-<@ListPage.Html title="${companyName?if_exists}后台 - 首页" headAttr='
+<@ListPage.Html title="设置首页 - ${companyName?if_exists}后台" headAttr='
 <link rel="stylesheet" href="../../js/slickGrid/slick.grid.css" type="text/css"/>
 <link rel="stylesheet" href="../../js/slickGrid/slick-default-theme.css" type="text/css"/>
   <link rel="stylesheet" href="../../js/slickGrid/css/smoothness/jquery-ui-1.11.3.custom.css" type="text/css"/>
@@ -61,7 +61,7 @@ css='
                     <h3 class="box-title">图片上传</h3>
                 </div>
                 <div class="box-body" style="">
-                    <!--用来存放item-->
+                    <!--用来存放图片item-->
                     <div id="fileList" class="uploader-list"></div>
                 </div>
                 <div class="box-footer clearfix ">

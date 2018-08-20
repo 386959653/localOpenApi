@@ -1,7 +1,7 @@
 <#import "ftl/sidebar.ftl" as ListPage>
 <#import "../ftl/lib.ftl" as com>
 
-<@ListPage.Html title="${companyName?if_exists}后台 - 首页" headAttr='
+<@ListPage.Html title="设置联系方式 - ${companyName?if_exists}后台" headAttr='
 <!--引用百度地图API-->
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=M5FEI32V9dDwpsrTbN9lU92xOf9vpYCK"></script>
     <script type="text/javascript" src="../../js/baiduMap.js"></script>

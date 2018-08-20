@@ -1,6 +1,6 @@
 <#import "ftl/headerAndFooter.ftl" as ListPage>
 
-<@ListPage.Html title="${companyName?if_exists} - 首页">
+<@ListPage.Html title="首页 - ${companyName?if_exists}">
 <div id="myCarousel" class="carousel slide">
     <!-- 轮播（Carousel）指标 -->
     <ol class="carousel-indicators" style="

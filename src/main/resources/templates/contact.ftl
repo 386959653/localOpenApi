@@ -1,6 +1,6 @@
 <#import "ftl/headerAndFooter.ftl" as ListPage>
 
-<@ListPage.Html title="${companyName?if_exists} - 联系我们" css="" headAttr='<!--引用百度地图API-->
+<@ListPage.Html title="联系我们 - ${companyName?if_exists}" css="" headAttr='<!--引用百度地图API-->
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=M5FEI32V9dDwpsrTbN9lU92xOf9vpYCK"></script>'>
 <div class="container">

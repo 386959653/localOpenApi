@@ -94,7 +94,7 @@ public class DashboardController {
         List<Product> productList = product.selectAll();
         map.put("productList", productList);
         map.put("activeFlag", "product");
-        return "product";
+        return "dashboard/product";
     }
 
     @RequestMapping("/contact")
