@@ -2,6 +2,8 @@ package com.weichi.erp.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.Condition;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.weichi.erp.Constant.BaseEnums;
 import com.weichi.erp.Constant.SuperDomainEnums;
 import com.weichi.erp.component.myType.JsonResult;
 import com.weichi.erp.component.utils.DateUtils;
@@ -10,10 +12,7 @@ import com.weichi.erp.domain.Contact;
 import com.weichi.erp.domain.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -74,6 +73,24 @@ public class DashboardController {
     }
 
     @ResponseBody
+    @RequestMapping("/productSave")
+    public JsonResult<?> productSave(@RequestBody Product product) {
+        JsonResult jsonResult = new JsonResult();
+        try {
+            if (product.getId() != null) {
+                product.updateById();
+            } else {
+                product.insert();
+            }
+        } catch (Exception e) {
+            jsonResult.setStatus(JsonResult.ERROR);
+            e.printStackTrace();
+        }
+        jsonResult.setData(product.getId().toString());
+        return jsonResult;
+    }
+
+    @ResponseBody
     @RequestMapping("/carouselDel")
     public JsonResult<?> carouselDel(@RequestBody List<Long> carouselIdList) {
         JsonResult jsonResult = new JsonResult();
@@ -88,13 +105,37 @@ public class DashboardController {
         return jsonResult;
     }
 
-    @RequestMapping("/product")
-    public String product(Map<String, Object> map) {
+    @RequestMapping("/productDel")
+    public String productDel(Map<String, Object> map, @RequestParam(value = "id") Long id) {
         Product product = new Product();
+        product.deleteById(id);
         List<Product> productList = product.selectAll();
         map.put("productList", productList);
         map.put("activeFlag", "product");
         return "dashboard/product";
+    }
+
+    @RequestMapping("/product/{currentPage}")
+    public String product(Map<String, Object> map, @PathVariable(value = "currentPage") int currentPage) {
+        Page<Product> page = new Page<Product>(currentPage, 10);
+        Product product = new Product();
+        page = product.selectPage(page, Condition.empty());
+        map.put("productList", page.getRecords());
+        map.put("page", page);
+        map.put("activeFlag", "product");
+        return "dashboard/product";
+    }
+
+    @RequestMapping("/productEdit")
+    public String productEdit(Map<String, Object> map, @RequestParam(value = "id") Long id, @RequestParam(value = "optFlag") String optFlag) {
+        map.put("activeFlag", "product");
+        if (BaseEnums.optFlag.add.name().equals(optFlag)) {
+            return "dashboard/productEdit";
+        } else if (BaseEnums.optFlag.modify.name().equals(optFlag)) {
+            Product product = new Product();
+            map.put("product", product.selectById(id));
+        }
+        return "dashboard/productEdit";
     }
 
     @RequestMapping("/contact")

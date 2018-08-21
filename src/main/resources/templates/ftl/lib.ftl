@@ -152,3 +152,23 @@ var rows2 = ${grid}.getDataLength();
         <p style="text-align:center;">
     </#if>
 </#macro>
+
+<#macro paging url>
+<#--分页-->
+<ul class="pagination inline">
+<#--第一页，禁用“上一页”按钮-->
+    <#if page.current gt 1>
+        <li><a href="${url}/${page.current-1}">«</a></li>
+    </#if>
+<#--当前页的前3页和后3页-->
+        <#list (page.current)..(page.pages) as index>
+<li><a href="${url}/${index}">${index}</a></li>
+        </#list>
+<#--不是最后页有“下一页”按钮-->
+    <#if page.current != page.pages>
+    <li><a href="${url}/${page.current+1}">»</a></li>
+    </#if>
+</ul>
+</#macro>
+
+

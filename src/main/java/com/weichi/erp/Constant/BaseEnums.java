@@ -21,4 +21,13 @@ public class BaseEnums {
         added
     }
 
+    /**
+     * 操作标志
+     */
+    public enum optFlag {
+        add,
+        del,
+        modify
+    }
+
 }

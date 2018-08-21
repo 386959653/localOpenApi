@@ -157,7 +157,8 @@ css='
             data.detailAddress = $('#detailAddress').val();
             AjaxHelper.post(url, data, function (data) {
                 if (data.status == "ok") {
-                    $('#saveTipModal').modal('toggle');
+                    tipModal.content = "保存成功！"
+                    $('#tipModal').modal('toggle');
                     $('#hideForm').submit();
                 }
             });
