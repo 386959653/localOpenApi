@@ -112,7 +112,7 @@ public class DashboardController {
         List<Product> productList = product.selectAll();
         map.put("productList", productList);
         map.put("activeFlag", "product");
-        return "dashboard/product";
+        return "forward:/dashboardController/product/1";
     }
 
     @RequestMapping("/product/{currentPage}")

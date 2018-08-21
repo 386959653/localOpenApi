@@ -15,7 +15,8 @@ css='
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-default pull-right"
-                        onclick="javascrtpt:window.location.href='productEdit?id=1&optFlag=add'"><i
+                        onclick="javascrtpt:window.location.href='${ctx}/dashboardController/productEdit?id=1&optFlag=add'">
+                    <i
                         class="fa fa-plus"></i> 新增
                 </button>
             </div>
@@ -26,12 +27,12 @@ css='
             <ul class="todo-list ui-sortable">
     <#list productList as item>
         <li class="">
-                    <span class="text"><a href="/productInfo?id=${item.id}">${item.productName?if_exists}
+                    <span class="text"><a href="${ctx}/productInfo?id=${item.id}">${item.productName?if_exists}
                     </a></span>
             <!-- General tools such as edit or delete-->
             <div class="tools" style="display: inline-block;">
-                <a href="productEdit?id=${item.id}&optFlag=modify"><i class="fa fa-edit"></i></a>
-                <a href="productDel?id=${item.id}"><i class="fa fa-trash-o"></i></a>
+                <a href="${ctx}/dashboardController/productEdit?id=${item.id}&optFlag=modify"><i class="fa fa-edit"></i></a>
+                <a href="${ctx}/dashboardController/productDel?id=${item.id}"><i class="fa fa-trash-o"></i></a>
             </div>
             <div class="panel-body">
                 <div class=" col-lg-3">
