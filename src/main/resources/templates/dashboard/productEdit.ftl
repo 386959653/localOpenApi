@@ -83,8 +83,40 @@ css='
 
     <script type="text/javascript">
         // CKEditor instance
-        ckEditor = CKEDITOR.replace('productDetail');
-            <@com.webUploader serverUrl="upload">
+        ckEditor = CKEDITOR.replace('productDetail', {
+            filebrowserUploadUrl: '${ctx}/dashboardController/upload'
+            // ,image_previewText :''
+        });
+        ckEditor.on('fileUploadRequest', function (evt) {
+            var fileLoader = evt.data.fileLoader,
+                    formData = new FormData(),
+                    xhr = fileLoader.xhr;
+            formData.append('file', fileLoader.file, fileLoader.fileName);
+            xhr.send(formData);
+            // Prevented the default behavior.
+            evt.stop();
+        });
+        ckEditor.on('fileUploadResponse', function (evt) {
+            // Prevent the default response handler.
+            evt.stop();
+
+            // Get XHR and response.
+            var data = evt.data,
+                    xhr = data.fileLoader.xhr,
+                    // response = xhr.responseText.split( '|' );
+                    response = JSON.parse(xhr.response);
+
+            if (response.status === 'error') {
+                // An error occurred during upload.
+                data.message = response.message;
+                evt.cancel();
+            } else {
+                data.url = response.data.imgUrl;
+            }
+        });
+
+
+            <@com.webUploader serverUrl="${ctx}/dashboardController/upload">
             $("#thumbnailUrl").val(response.data.imgUrl);
             </@com.webUploader>
 

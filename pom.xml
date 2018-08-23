@@ -218,9 +218,9 @@
             </activation>
             <properties>
                 <resource.delimiter>${}</resource.delimiter>
-                <jdbc.url>jdbc:mysql://192.168.3.105:3306/test2?useUnicode=true&amp;characterEncoding=utf8</jdbc.url>
+                <jdbc.url>jdbc:mysql://mysql:3306/officialWeb?useUnicode=true&amp;characterEncoding=utf8</jdbc.url>
                 <jdbc.username>root</jdbc.username>
-                <jdbc.password>123456</jdbc.password>
+                <jdbc.password>ww330326!</jdbc.password>
                 <log4j.level>INFO</log4j.level>
                 <!--mybatis热加载-->
                 <refreshMapper>false</refreshMapper>

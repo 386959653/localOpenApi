@@ -31,7 +31,7 @@ ${headAttr}'
                         </div>
                         <div class="pull-left info">
                             <p>Alexander Pierce</p>
-                            <a href="#"><i class="fa fa-sign-out"></i> 退出登录</a>
+                            <a href="${ctx}/logout"><i class="fa fa-sign-out"></i> 退出登录</a>
                         </div>
                     </div>
 
