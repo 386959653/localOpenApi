@@ -17,52 +17,88 @@ input[type="text"],input[type="password"]{padding-left:26px;}
 .checkbox{padding-left:21px;}
 '
 >
-
 <div class="container">
-    <form action="/user/login" method="post">
+    <form id="loginForm" action="/user/login" method="post" class="form-horizontal" role="form">
         <div class="form row">
-            <div class="col-md-offset-4" id="login_form">
+            <div class="col-md-offset-4">
                 <h3 class="form-title" style="margin-left: 10px;">登录</h3>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="col-md-6">
+                        <div class="form-group ">
                         <i class="fa fa-user fa-lg"></i>
                         <input class="form-control required " type="text" placeholder="用户名" id="username"
                                name="username" autofocus="autofocus"/>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
+                        <div class="form-group ">
                         <i class="fa fa-lock fa-lg"></i>
                         <input class="form-control required" type="password" placeholder="密码" id="password"
                                name="password"/>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
+    <#if error ??>
+                        <div class="form-group ">
+                            <div class="row">
+                                <div class="col-md-8 col-xs-6  ">
+
+                                    <i class="fa fa-shield" aria-hidden="true"></i>
+                                    <input class="form-control required" type="text" name="vrifyCode" placeholder="验证码"
+                                           id="vrifyCode"/>
+
+                                </div>
+                                <div class="col-md-4 col-xs-6">
+                                    <img id="verifyCodeImg" class="pull-right" alt="验证码"
+                                         onclick="this.src='${ctx}/vrifyCode?d='+new Date()*1" src="${ctx}/vrifyCode"
+                                         style="padding-top:20px;"/>
+                                </div>
+                            </div>
+                        </div>
+    </#if>
+                        <div class="form-group ">
                         <label class="checkbox">
-                            <input type="checkbox" name="remember" value="1"/>记住我
+                            <input type="checkbox" name="remember-me"/>记住我
                         </label>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
+
+                        <div class="form-group ">
                         <button type="submit" class="btn btn-success pull-right" name="submit"
                                 style="margin-bottom:10px;">登录
                         </button>
                     </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
-    <#if error ??>
-    <div class="alert alert-danger alert-dismissable">
+            <div id="verifyCodeCheckResult" style="display: none"
+                 class="alert alert-danger alert-dismissable text-center">
+                <button type="button" class="close" data-dismiss="alert"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                验证码错误，请重新输入！
+            </div>
+                         <#if error ??>
+    <div class="alert alert-danger alert-dismissable text-center">
         <button type="button" class="close" data-dismiss="alert"
                 aria-hidden="true">
             &times;
         </button>
         用户名或密码错误，请重新输入！
     </div>
-    </#if>
+                         </#if>
+        </div>
+    </form>
+
 </div>
+<script type="text/javascript">
+
+    $('#vrifyCode').blur(function () {
+        var url = "${ctx}/verifyCodeCheck";
+        var data = $('#vrifyCode').val().trim();
+        AjaxHelper.post(url, data, function (response) {
+            if (response.message == "验证码错误") {
+                $('#verifyCodeCheckResult').toggle();
+                $('#verifyCodeImg').click();
+            }
+        });
+    });
+</script>
 
 </@ListPage.Html>

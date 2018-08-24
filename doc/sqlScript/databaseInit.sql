@@ -206,3 +206,10 @@ ALTER TABLE carousel
   MODIFY enable_flag enum ("Y", "N") COMMENT '启用标志(Y/N)';
 ALTER TABLE carousel
   ALTER COLUMN enable_flag SET DEFAULT "N";
+
+create table persistent_logins (
+  username  varchar(100) not null,
+  series    varchar(64) primary key,
+  token     varchar(64)  not null,
+  last_used timestamp    not null
+);
