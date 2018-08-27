@@ -37,7 +37,7 @@ ${headAttr}'
                             <img src="../../../img/defaultAvatar.jpg" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>Alexander Pierce</p>
+                            <p>${Session.SPRING_SECURITY_CONTEXT.authentication.principal.username}</p>
                             <a href="${ctx}/logout"><i class="fa fa-sign-out"></i> 退出登录</a>
                         </div>
                     </div>
