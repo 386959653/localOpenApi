@@ -3,6 +3,7 @@
     <@ListPage.Html title="${title}" css="${css}"
     headAttr='<link rel="stylesheet" href="../../../css/adminLTE/AdminLTE.min.css" type="text/css"/>
 <link rel="stylesheet" href="../../../css/adminLTE/skins/_all-skins.min.css" type="text/css"/>
+<script type="text/javascript" src="${ctx}/css/adminLTE/adminlte.min.js"></script>
 ${headAttr}'
     bodyAttr='class="skin-blue sidebar-mini wysihtml5-supported" style="height: auto; min-height: 100%;"'>
         <div class="wrapper">
@@ -16,7 +17,13 @@ ${headAttr}'
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top">
-
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
                 </nav>
             </header>
 
