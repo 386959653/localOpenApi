@@ -41,18 +41,20 @@ css='
 
 <#--表格-->
             <div class="row">
+                <div class="col-lg-7 col-xs-12">
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">jrebel注册</h3>
                 </div>
                 <div class="box-body" style="">
-                    <div id="myGrid" class="col-lg-7 col-xs-12"></div>
+                    <div id="myGrid"></div>
                 </div>
                 <div class="box-footer clearfix ">
                     <button id="delete" type="button" class="btn btn-default"><i class="fa fa-minus"></i> 删除选中行</button>
                     <button id="save" type="button" class="btn btn-default"><i class="fa fa-plus"></i> 保存</button>
                 </div>
             </div>
+                </div>
             </div>
 
 
