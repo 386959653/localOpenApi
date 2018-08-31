@@ -9,6 +9,7 @@ import com.weichi.erp.component.myType.JsonResult;
 import com.weichi.erp.component.utils.DateUtils;
 import com.weichi.erp.domain.Carousel;
 import com.weichi.erp.domain.Contact;
+import com.weichi.erp.domain.Jrebel;
 import com.weichi.erp.domain.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
@@ -35,6 +36,15 @@ public class DashboardController {
         return "dashboard/index";
     }
 
+    @RequestMapping("/jrebelReg")
+    public String jrebelReg(Map<String, Object> map) {
+        Jrebel jrebel = new Jrebel();
+        List<Jrebel> jrebelList = jrebel.selectAll();
+        map.put("jrebelList", JSON.toJSONString(jrebelList));
+        map.put("activeFlag", "jrebelReg");
+        return "dashboard/jrebelReg";
+    }
+
     @ResponseBody
     @RequestMapping("/carouselSave")
     public JsonResult<?> carouselSave(@RequestBody List<Carousel> carouselList) {
@@ -45,6 +55,25 @@ public class DashboardController {
                     carousel.updateById();
                 } else if (carousel.getState().equals(SuperDomainEnums.state.added.name())) {
                     carousel.insert();
+                }
+        } catch (Exception e) {
+            jsonResult.setStatus(JsonResult.ERROR);
+            e.printStackTrace();
+        }
+
+        return jsonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping("/jrebelSave")
+    public JsonResult<?> jrebelSave(@RequestBody List<Jrebel> jrebelList) {
+        JsonResult jsonResult = new JsonResult();
+        try {
+            for (Jrebel jrebel : jrebelList)
+                if (jrebel.getState().equals(SuperDomainEnums.state.modified.name())) {
+                    jrebel.updateById();
+                } else if (jrebel.getState().equals(SuperDomainEnums.state.added.name())) {
+                    jrebel.insert();
                 }
         } catch (Exception e) {
             jsonResult.setStatus(JsonResult.ERROR);
@@ -97,6 +126,21 @@ public class DashboardController {
         try {
             Carousel carousel = new Carousel();
             carousel.delete(Condition.create().in("id", carouselIdList));
+        } catch (Exception e) {
+            jsonResult.setStatus(JsonResult.ERROR);
+            e.printStackTrace();
+        }
+
+        return jsonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping("/jrebelDel")
+    public JsonResult<?> jrebelDel(@RequestBody List<Long> jrebelIdList) {
+        JsonResult jsonResult = new JsonResult();
+        try {
+            Jrebel jrebel = new Jrebel();
+            jrebel.delete(Condition.create().in("id", jrebelIdList));
         } catch (Exception e) {
             jsonResult.setStatus(JsonResult.ERROR);
             e.printStackTrace();

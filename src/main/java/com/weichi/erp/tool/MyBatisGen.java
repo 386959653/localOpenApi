@@ -17,7 +17,7 @@ import java.util.Properties;
  */
 public class MyBatisGen {
     // 改成要生成的表名称，%通配符，支持 [fnd_%],如果连接的数据库、项目的包结构不变，只需改这里就能自动生成domain、xml文件
-    private static final String TABLENAME = "product";
+    private static final String TABLENAME = "jrebel";
 
     private static final String BASEPACKAGE = "com.weichi.erp";
 

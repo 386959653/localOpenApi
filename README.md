@@ -26,3 +26,5 @@
     16. 实现sidebar响应式
     17. 实现freemarker从session获取用户名
     18. 实现maven自动部署到远程服务器
+- 个性化功能：
+    1. 实现jrebel注册管理

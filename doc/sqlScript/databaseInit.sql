@@ -213,3 +213,23 @@ create table persistent_logins (
   token     varchar(64)  not null,
   last_used timestamp    not null
 );
+
+drop table if exists jrebel;
+/*==============================================================*/
+/* Table: jrebel                                                */
+/*==============================================================*/
+create table jrebel
+(
+  id              bigint not null
+  comment '主键',
+  defined_user_id varchar(100) comment '邮箱',
+  token           varchar(36) comment '36位guid',
+  insert_username varchar(100) comment 'insert_username',
+  insert_time     datetime comment 'insert_time',
+  update_username varchar(100) comment 'update_username',
+  update_time     datetime comment 'update_time',
+  primary key (id)
+);
+
+alter table jrebel
+  comment 'jrebel注册表';

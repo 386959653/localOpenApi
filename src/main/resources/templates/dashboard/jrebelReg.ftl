@@ -1,7 +1,7 @@
 <#import "ftl/sidebar.ftl" as ListPage>
 <#import "../ftl/lib.ftl" as com>
 
-<@ListPage.Html title="设置首页 - ${companyName?if_exists}后台" headAttr='
+<@ListPage.Html title="jrebel注册 - ${companyName?if_exists}后台" headAttr='
 <link rel="stylesheet" href="../../js/slickGrid/slick.grid.css" type="text/css"/>
 <link rel="stylesheet" href="../../js/slickGrid/slick-default-theme.css" type="text/css"/>
   <link rel="stylesheet" href="../../js/slickGrid/css/smoothness/jquery-ui-1.11.3.custom.css" type="text/css"/>
@@ -34,7 +34,7 @@ css='
 '
 
 >
-<form action='index' id="hideForm">
+<form action='${ctx}/dashboardController/jrebelReg' id="hideForm">
 
 </form>
 <section class="content">
@@ -43,37 +43,23 @@ css='
         <#--表格-->
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">设置轮播图</h3>
+                    <h3 class="box-title">jrebel注册</h3>
                 </div>
                 <div class="box-body" style="">
                 <#--表格宽度为所有列宽度加30px-->
                     <div id="myGrid" style="width:550px;height:250px;"></div>
-    </div>
+                </div>
                 <div class="box-footer clearfix ">
                     <button id="delete" type="button" class="btn btn-default"><i class="fa fa-minus"></i> 删除选中行</button>
                     <button id="save" type="button" class="btn btn-default"><i class="fa fa-plus"></i> 保存</button>
                 </div>
             </div>
 
-        <#--上传图片-->
-            <div class="box box-primary">
-                <div class="box-header">
-                    <h3 class="box-title">图片上传</h3>
-                </div>
-                <div class="box-body" style="">
-                    <!--用来存放图片item-->
-                    <div id="fileList" class="uploader-list"></div>
-                </div>
-                <div class="box-footer clearfix ">
-                    <div id="filePicker">选择图片</div>
-                </div>
-            </div>
         </section>
     </div>
 </section>
     <@com.MY_MODAL id="deleteModal" content="确认删除吗？" />
     <@com.MY_MODAL id="saveModal" content="确认保存吗？" />
-
 
     <script type="text/javascript">
         function requiredFieldValidator(value) {
@@ -84,43 +70,29 @@ css='
             }
         }
 
-        function selectFormatter(row, cell, value, columnDef, dataContext) {
-            if (value == "Y") {
-                return "是";
-            } else {
-                return "否";
-            }
-
-        }
-
         var grid;
         var checkboxSelector = new Slick.CheckboxSelectColumn({
             cssClass: "slick-cell-checkboxsel"
         });
-        var data = ${carouselList};
+        var data = ${jrebelList};
         var columns = [
-            checkboxSelector.getColumnDefinition(),
-            {
-                id: "imgName",
-                name: "图片名称",
-                field: "imgName",
-                width: 120,
-                editor: Slick.Editors.Text,
+            checkboxSelector.getColumnDefinition()
+            , {
+                id: "definedUserId",
+                name: "注册邮箱",
+                field: "definedUserId",
+                width: 260,
+                editor: Slick.Editors.LongText,
                 validator: requiredFieldValidator
             }
-            , {id: "imgUrl", name: "图片地址", field: "imgUrl", width: 100, editor: Slick.Editors.LongText}
-            , {id: "imgLink", name: "图片链接", field: "imgLink", width: 100, editor: Slick.Editors.LongText}
             , {
-                id: "enableFlag",
-                name: "启用标志",
-                field: "enableFlag",
-                width: 100,
-                editor: Slick.Editors.Select,
-                options: "<option value=\"Y\">是</option><option value=\"N\">否</option>",
-                notEmpVal: true,
-                formatter: selectFormatter
+                id: "token",
+                name: "36位GUID",
+                field: "token",
+                width: 260,
+                editor: Slick.Editors.LongText,
+                validator: requiredFieldValidator
             }
-            , {id: "orderNum", name: "排序字段", field: "orderNum", width: 100, editor: Slick.Editors.Integer}
         ];
         var options = {
             editable: true,
@@ -147,7 +119,7 @@ css='
             $('#saveModal').modal('toggle');
             $(".loading").toggle();
             grid.getEditController().commitCurrentEdit();
-            var url = "carouselSave";
+            var url = "${ctx}/dashboardController/jrebelSave";
             var data = editor.getChanged();
 
             if (data.length > 0) {
@@ -182,7 +154,7 @@ css='
                 }
             });
 
-            var url = 'carouselDel';
+            var url = '${ctx}/dashboardController/jrebelDel';
 
             AjaxHelper.post(url, del_db_ids, function (response) {
                 if (response.status == "ok") {
@@ -205,12 +177,6 @@ css='
             <@com.RETURN_NO_ROW "grid" />
             $('#deleteModal').modal('toggle');
         });
-
-        <@com.webUploader serverUrl="upload">
-        grid.getEditController().commitCurrentEdit();
-editor.addItem(response.data);
-grid.invalidate();
-        </@com.webUploader>
 
         $(function () {
             grid = new Slick.Grid("#myGrid", new Slick.Data.Model({"data": data}), columns, options);
