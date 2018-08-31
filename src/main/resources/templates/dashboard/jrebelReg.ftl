@@ -38,9 +38,8 @@ css='
 
 </form>
 <section class="content">
-    <div class="row">
-        <section class="col-lg-12 ">
-        <#--表格-->
+
+<#--表格-->
             <div class="row">
             <div class="box box-primary">
                 <div class="box-header">
@@ -56,8 +55,7 @@ css='
             </div>
             </div>
 
-        </section>
-    </div>
+
 </section>
     <@com.MY_MODAL id="deleteModal" content="确认删除吗？" />
     <@com.MY_MODAL id="saveModal" content="确认保存吗？" />
