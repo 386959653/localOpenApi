@@ -41,18 +41,19 @@ css='
     <div class="row">
         <section class="col-lg-12 ">
         <#--表格-->
+            <div class="row">
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">设置轮播图</h3>
                 </div>
                 <div class="box-body" style="">
-                <#--表格宽度为所有列宽度加30px-->
-                    <div id="myGrid" style="width:550px;height:250px;"></div>
+                    <div id="myGrid" class="col-lg-12 col-xs-12"></div>
     </div>
                 <div class="box-footer clearfix ">
                     <button id="delete" type="button" class="btn btn-default"><i class="fa fa-minus"></i> 删除选中行</button>
                     <button id="save" type="button" class="btn btn-default"><i class="fa fa-plus"></i> 保存</button>
                 </div>
+            </div>
             </div>
 
         <#--上传图片-->
@@ -108,8 +109,8 @@ css='
                 editor: Slick.Editors.Text,
                 validator: requiredFieldValidator
             }
-            , {id: "imgUrl", name: "图片地址", field: "imgUrl", width: 100, editor: Slick.Editors.LongText}
-            , {id: "imgLink", name: "图片链接", field: "imgLink", width: 100, editor: Slick.Editors.LongText}
+            , {id: "imgUrl", name: "图片地址", field: "imgUrl", width: 540, editor: Slick.Editors.LongText}
+            , {id: "imgLink", name: "图片链接", field: "imgLink", width: 350, editor: Slick.Editors.LongText}
             , {
                 id: "enableFlag",
                 name: "启用标志",
@@ -127,7 +128,9 @@ css='
             enableAddRow: true,
             enableCellNavigation: true,
             asyncEditorLoading: false,
-            autoEdit: false
+            autoEdit: false,
+            //自适应高度
+            autoHeight: true
         };
         var editor = new Slick.EditManager({
             onUpdateItem: function (i, item) {
