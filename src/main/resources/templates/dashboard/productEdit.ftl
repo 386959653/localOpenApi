@@ -116,9 +116,9 @@ css='
         });
 
 
-            <@com.webUploader serverUrl="${ctx}/dashboardController/upload">
+            <@com.WEB_UPLOADER serverUrl="${ctx}/dashboardController/upload">
             $("#thumbnailUrl").val(response.data.imgUrl);
-            </@com.webUploader>
+            </@com.WEB_UPLOADER>
 
         $('#saveModalConfirm').click(function () {
             $('#saveModal').modal('toggle');

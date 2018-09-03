@@ -51,7 +51,7 @@ css='
         </div>
         <!-- /.box-body -->
         <div class="box-footer clearfix no-border">
-            <@com.paging url="${ctx}/dashboardController/product"/>
+            <@com.PAGING url="${ctx}/dashboardController/product"/>
         </div>
     </div>
 </section>

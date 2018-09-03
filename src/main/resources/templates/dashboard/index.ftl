@@ -211,11 +211,11 @@ css='
             $('#deleteModal').modal('toggle');
         });
 
-        <@com.webUploader serverUrl="upload">
+        <@com.WEB_UPLOADER serverUrl="upload">
         grid.getEditController().commitCurrentEdit();
 editor.addItem(response.data);
 grid.invalidate();
-        </@com.webUploader>
+        </@com.WEB_UPLOADER>
 
         $(function () {
             grid = new Slick.Grid("#myGrid", new Slick.Data.Model({"data": data}), columns, options);

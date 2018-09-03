@@ -613,7 +613,7 @@
         };
 
         this.serializeValue = function () {
-            return $input.val();
+            return $input.val().trim();
         };
 
         this.applyValue = function (item, state) {
