@@ -26,5 +26,6 @@
     16. 实现sidebar响应式
     17. 实现freemarker从session获取用户名
     18. 实现maven自动部署到远程服务器
+    19. 实现slickgrid分页，并且可以通过区分手机端和PC端来决定每页的页数
 - 个性化功能：
     1. 实现jrebel注册管理

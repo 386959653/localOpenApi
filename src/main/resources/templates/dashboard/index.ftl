@@ -102,8 +102,9 @@ css='
         });
         var data = ${carouselList};
         var columns = [
-            checkboxSelector.getColumnDefinition(),
-            {
+            checkboxSelector.getColumnDefinition()
+            , {id: "index", name: "序号", width: 45, formatter: Slick.Formatters.IdFormatter}
+            , {
                 id: "imgName",
                 name: "图片名称",
                 field: "imgName",
@@ -222,7 +223,6 @@ grid.invalidate();
             grid.registerPlugin(editor);
             grid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
             grid.registerPlugin(checkboxSelector);
-            grid.init();
         });
     </script>
 </@ListPage.Html>

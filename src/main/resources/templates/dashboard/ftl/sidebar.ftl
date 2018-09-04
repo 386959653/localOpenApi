@@ -55,8 +55,8 @@ ${headAttr}'
                                 class="fa fa-phone"></i> <span>设置联系方式</span></a>
                         </li>
                         <li <#if activeFlag="jrebelReg" >class="active"</#if> ><a
-                                href="${ctx}/dashboardController/jrebelReg"><i class="fa fa-user-plus"
-                                                                               aria-hidden="true"></i>
+                                href="${ctx}/dashboardController/jrebelReg/1"><i class="fa fa-user-plus"
+                                                                                 aria-hidden="true"></i>
                             <span>jrebel注册</span></a>
                         </li>
 

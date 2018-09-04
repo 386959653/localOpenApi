@@ -16,6 +16,7 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -36,11 +37,24 @@ public class DashboardController {
         return "dashboard/index";
     }
 
-    @RequestMapping("/jrebelReg")
-    public String jrebelReg(Map<String, Object> map) {
+    @RequestMapping("/jrebelReg/{currentPage}")
+    public String jrebelReg(Map<String, Object> map, @PathVariable(value = "currentPage") int currentPage, HttpServletRequest request) {
+        Page<Product> page = new Page<Product>(currentPage, 10);
+        ;
+        String userAgent = request.getHeader("User-Agent");
+        if (userAgent.indexOf("Android") != -1) {
+            //安卓
+        } else if (userAgent.indexOf("iPhone") != -1 || userAgent.indexOf("iPad") != -1) {
+            //苹果
+        } else {
+            //电脑
+            page = new Page<Product>(currentPage, 20);
+        }
+
         Jrebel jrebel = new Jrebel();
-        List<Jrebel> jrebelList = jrebel.selectAll();
-        map.put("jrebelList", JSON.toJSONString(jrebelList));
+        page = jrebel.selectPage(page, Condition.empty());
+        map.put("jrebelList", JSON.toJSONString(page.getRecords()));
+        map.put("page", page);
         map.put("activeFlag", "jrebelReg");
         return "dashboard/jrebelReg";
     }

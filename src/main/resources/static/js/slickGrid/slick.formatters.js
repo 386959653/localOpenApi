@@ -18,6 +18,7 @@
                 "YesNo": YesNoFormatter,
                 "Checkmark": CheckmarkFormatter,
                 "Checkbox": CheckboxFormatter
+                , IdFormatter: IdFormatter
 
             }
         }
@@ -61,5 +62,9 @@
 
     function CheckmarkFormatter(row, cell, value, columnDef, dataContext) {
         return value ? "<img src='../img/slickGrid/tick.png'>" : "";
+    }
+
+    function IdFormatter(row, cell, value, columnDef, dataContext) {
+        return row + 1;
     }
 })(jQuery);

@@ -34,7 +34,7 @@ css='
 '
 
 >
-<form action='${ctx}/dashboardController/jrebelReg' id="hideForm">
+<form action='${ctx}/dashboardController/jrebelReg/${page.current}' id="hideForm">
 
 </form>
 <section class="content">
@@ -48,6 +48,8 @@ css='
                 </div>
                 <div class="box-body" style="">
                     <div id="myGrid"></div>
+                    </br>
+                    <@com.PAGING url="${ctx}/dashboardController/jrebelReg"/>
                 </div>
                 <div class="box-footer clearfix ">
                     <button id="delete" type="button" class="btn btn-default"><i class="fa fa-minus"></i> 删除选中行</button>
@@ -78,6 +80,7 @@ css='
         var data = ${jrebelList};
         var columns = [
             checkboxSelector.getColumnDefinition()
+            , {id: "index", name: "序号", width: 45, formatter: Slick.Formatters.IdFormatter}
             , {
                 id: "definedUserId",
                 name: "注册邮箱",
@@ -185,7 +188,6 @@ css='
             grid.registerPlugin(editor);
             grid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
             grid.registerPlugin(checkboxSelector);
-            grid.init();
         });
     </script>
 </@ListPage.Html>
