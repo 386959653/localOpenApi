@@ -7,6 +7,7 @@ import com.weichi.erp.Constant.BaseEnums;
 import com.weichi.erp.Constant.SuperDomainEnums;
 import com.weichi.erp.component.myType.JsonResult;
 import com.weichi.erp.component.utils.DateUtils;
+import com.weichi.erp.component.utils.WebUtils;
 import com.weichi.erp.domain.Carousel;
 import com.weichi.erp.domain.Contact;
 import com.weichi.erp.domain.Jrebel;
@@ -39,18 +40,10 @@ public class DashboardController {
 
     @RequestMapping("/jrebelReg/{currentPage}")
     public String jrebelReg(Map<String, Object> map, @PathVariable(value = "currentPage") int currentPage, HttpServletRequest request) {
-        Page<Product> page = new Page<Product>(currentPage, 10);
-        ;
-        String userAgent = request.getHeader("User-Agent");
-        if (userAgent.indexOf("Android") != -1) {
-            //安卓
-        } else if (userAgent.indexOf("iPhone") != -1 || userAgent.indexOf("iPad") != -1) {
-            //苹果
-        } else {
-            //电脑
-            page = new Page<Product>(currentPage, 20);
+        Page<Product> page = new Page<Product>(currentPage, 20);
+        if (WebUtils.isMobile(request)) {
+            page = new Page<Product>(currentPage, 10);
         }
-
         Jrebel jrebel = new Jrebel();
         page = jrebel.selectPage(page, Condition.empty());
         map.put("jrebelList", JSON.toJSONString(page.getRecords()));
