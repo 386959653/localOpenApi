@@ -5,14 +5,12 @@ import com.weichi.erp.component.Jaxb.CDATASectionAdapter;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Created by Wewon on 2018/9/14.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "item")
 public class ShortcutPhraseItem {
     @XmlElement
     @XmlJavaTypeAdapter(CDATASectionAdapter.class)

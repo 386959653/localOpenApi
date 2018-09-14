@@ -12,7 +12,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "xparam")
 public class ShortcutPhrase {
-    @XmlElement
+    @XmlElement(name = "item")
     private List<ShortcutPhraseItem> shortcutPhraseItemList;
 
     public List<ShortcutPhraseItem> getShortcutPhraseItemList() {
