@@ -211,7 +211,7 @@ public class DashboardController {
         for (Jrebel j : jrebelList) {
             ShortcutPhraseItem shortcutPhraseItem = new ShortcutPhraseItem();
             shortcutPhraseItem.setsText("\\C0\\S0xa.0xc8\\F微软雅黑\\T亲，您的激活链接是：" + j.getToken());
-            shortcutPhraseItem.setsCode("jrebel");
+            shortcutPhraseItem.setsGroupName("jrebel");
             shortcutPhraseItemList.add(shortcutPhraseItem);
         }
         shortcutPhrase.setShortcutPhraseItemList(shortcutPhraseItemList);
