@@ -210,7 +210,7 @@ public class DashboardController {
         List<ShortcutPhraseItem> shortcutPhraseItemList = new ArrayList<>();
         for (Jrebel j : jrebelList) {
             ShortcutPhraseItem shortcutPhraseItem = new ShortcutPhraseItem();
-            shortcutPhraseItem.setsText("\\C0\\S0xa.0xc8\\F微软雅黑\\T亲，您的激活链接是：" + j.getToken());
+            shortcutPhraseItem.setsText("\\C0\\S0xa.0xc8\\F微软雅黑\\T亲，您的激活链接是：" + System.getProperty("line.separator") + "http://jrebel.weichi.tech:9001/" + j.getToken());
             shortcutPhraseItem.setsGroupName("jrebel");
             shortcutPhraseItemList.add(shortcutPhraseItem);
         }
