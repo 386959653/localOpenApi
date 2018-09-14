@@ -24,6 +24,8 @@
 <link rel="stylesheet" href="../../css/webUploader.css" type="text/css"/>
 <script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.js"></script>
 
+<script type="text/javascript" src="${ctx}/js/uuid.js"></script>
+
 '
 css='
 .slick-cell-checkboxsel {
@@ -32,8 +34,8 @@ css='
       border-right-style: solid;
     }
 '
-
 >
+
 <form action='${ctx}/dashboardController/jrebelReg/${page.current}' id="hideForm">
 
 </form>
@@ -45,6 +47,15 @@ css='
             <div class="box box-primary">
                 <div class="box-header">
                     <h3 class="box-title">jrebel注册</h3>
+                    <div class="box-tools pull-right">
+                        <button id="add10GUID" type="button" class="btn btn-info">
+                            <i class="fa fa-plus"></i> 新增10条GUID
+                        </button>
+                        <button id="exportShortcutPhrase" type="button" class="btn btn-info"
+                                onclick="javascrtpt:window.location.href='${ctx}/dashboardController/exportShortcutPhrase'">
+                            <i class="fa fa-plus"></i> 导出10条旺旺快捷短语
+                        </button>
+                    </div>
                 </div>
                 <div class="box-body" style="">
                     <div id="myGrid"></div>
@@ -65,13 +76,6 @@ css='
     <@com.MY_MODAL id="saveModal" content="确认保存吗？" />
 
     <script type="text/javascript">
-        function requiredFieldValidator(value) {
-            if (value == null || value == undefined || !value.length) {
-                return {valid: false, msg: "This is a required field"};
-            } else {
-                return {valid: true, msg: null};
-            }
-        }
 
         var grid;
         var checkboxSelector = new Slick.CheckboxSelectColumn({
@@ -86,16 +90,14 @@ css='
                 name: "注册邮箱",
                 field: "definedUserId",
                 width: 260,
-                editor: Slick.Editors.LongText,
-                validator: requiredFieldValidator
+                editor: Slick.Editors.LongText
             }
             , {
                 id: "token",
                 name: "36位GUID",
                 field: "token",
                 width: 370,
-                editor: Slick.Editors.LongText,
-                validator: requiredFieldValidator
+                editor: Slick.Editors.LongText
             }
         ];
         var options = {
@@ -142,6 +144,15 @@ css='
 
         $('#save').click(function () {
             $('#saveModal').modal('toggle');
+        });
+        $('#add10GUID').click(function () {
+            grid.getEditController().commitCurrentEdit();
+            for (var i = 0; i < 10; ++i) {
+                var newItem = {};
+                newItem.token = Math.uuid();
+                editor.addItem(newItem);
+            }
+            grid.invalidate();
         });
 
         $('#deleteModalConfirm').click(function () {

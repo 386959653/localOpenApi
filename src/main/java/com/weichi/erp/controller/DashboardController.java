@@ -6,19 +6,22 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.weichi.erp.Constant.BaseEnums;
 import com.weichi.erp.Constant.SuperDomainEnums;
 import com.weichi.erp.component.myType.JsonResult;
+import com.weichi.erp.component.myType.ResponseStream;
 import com.weichi.erp.component.utils.DateUtils;
 import com.weichi.erp.component.utils.WebUtils;
-import com.weichi.erp.domain.Carousel;
-import com.weichi.erp.domain.Contact;
-import com.weichi.erp.domain.Jrebel;
-import com.weichi.erp.domain.Product;
+import com.weichi.erp.component.utils.XmlUtils;
+import com.weichi.erp.domain.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +32,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/dashboardController")
 public class DashboardController {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @RequestMapping("/index")
     public String index(Map<String, Object> map) {
         Carousel carousel = new Carousel();
@@ -45,7 +49,7 @@ public class DashboardController {
             page = new Page<Product>(currentPage, 10);
         }
         Jrebel jrebel = new Jrebel();
-        page = jrebel.selectPage(page, Condition.empty());
+        page = jrebel.selectPage(page, Condition.create().orderBy("id", false));
         map.put("jrebelList", JSON.toJSONString(page.getRecords()));
         map.put("page", page);
         map.put("activeFlag", "jrebelReg");
@@ -195,6 +199,51 @@ public class DashboardController {
         map.put("contact", contact.selectById(1L));
         map.put("activeFlag", "contact");
         return "dashboard/contact";
+    }
+
+    @RequestMapping("/exportShortcutPhrase")
+    public void exportShortcutPhrase(HttpServletRequest request, HttpServletResponse response) {
+        String fileName = "旺旺快捷短语_" + DateUtils.getMillisecondAsName() + ".xml";
+        ShortcutPhrase shortcutPhrase = new ShortcutPhrase();
+        Jrebel jrebel = new Jrebel();
+        List<Jrebel> jrebelList = jrebel.selectList(Condition.create().orderBy("id", false).last("limit 10"));
+        List<ShortcutPhraseItem> shortcutPhraseItemList = new ArrayList<>();
+        for (Jrebel j : jrebelList) {
+            ShortcutPhraseItem shortcutPhraseItem = new ShortcutPhraseItem();
+            shortcutPhraseItem.setsText("\\C0\\S0xa.0xc8\\F微软雅黑\\T亲，您的激活链接是：" + j.getToken());
+            shortcutPhraseItem.setsCode("jrebel");
+            shortcutPhraseItemList.add(shortcutPhraseItem);
+        }
+        shortcutPhrase.setShortcutPhraseItemList(shortcutPhraseItemList);
+        String str = XmlUtils.convertToXml(shortcutPhrase);
+        try {
+            InputStream in = new ByteArrayInputStream(str.getBytes("utf-8"));
+            ResponseStream.out(in, fileName, request, response);
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error("errorinfo", e);
+            StringBuilder stackSb = new StringBuilder();
+            stackSb.append(e.getMessage());
+            stackSb.append(System.getProperty("line.separator"));
+            for (StackTraceElement s : e.getStackTrace()) {
+                stackSb.append(s.toString());
+                stackSb.append(System.getProperty("line.separator"));
+            }
+            InputStream inWithcode = null;
+            try {
+                inWithcode = new ByteArrayInputStream(stackSb.toString().getBytes("UTF-8"));
+            } catch (UnsupportedEncodingException e1) {
+                e1.printStackTrace();
+                logger.error("errorinfo", e1);
+            }
+            try {
+                ResponseStream
+                        .out(inWithcode, "error.txt", request, response);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+                logger.error("errorinfo", e1);
+            }
+        }
     }
 
     @RequestMapping(value = "/upload")
