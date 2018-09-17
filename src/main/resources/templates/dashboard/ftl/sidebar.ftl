@@ -54,10 +54,19 @@ ${headAttr}'
                                 href="${ctx}/dashboardController/contact"><i
                                 class="fa fa-phone"></i> <span>设置联系方式</span></a>
                         </li>
-                        <li <#if activeFlag="jrebelReg" >class="active"</#if> ><a
-                                href="${ctx}/dashboardController/jrebelReg/1"><i class="fa fa-user-plus"
-                                                                                 aria-hidden="true"></i>
-                            <span>jrebel注册</span></a>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-user-plus"></i> <span>jrebel注册</span>
+                                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                            </a>
+                            <ul class="treeview-menu" style="display: none;">
+                                <li><a href="${ctx}/dashboardController/jrebelReg/1"><i class="fa fa-circle-o"></i>
+                                    jrebel可用注册</a></li>
+                                <li><a href="${ctx}/dashboardController/jrebelRegAll/1"><i class="fa fa-circle-o"></i>
+                                    jrebel全部注册信息</a></li>
+                            </ul>
                         </li>
 
                     </ul>

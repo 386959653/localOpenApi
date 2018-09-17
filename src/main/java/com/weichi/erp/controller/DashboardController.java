@@ -49,6 +49,20 @@ public class DashboardController {
             page = new Page<Product>(currentPage, 10);
         }
         Jrebel jrebel = new Jrebel();
+        page = jrebel.selectPage(page, Condition.create().isNull("defined_user_id").orderBy("id"));
+        map.put("jrebelList", JSON.toJSONString(page.getRecords()));
+        map.put("page", page);
+        map.put("activeFlag", "jrebelReg");
+        return "dashboard/jrebelReg";
+    }
+
+    @RequestMapping("/jrebelRegAll/{currentPage}")
+    public String jrebelRegAll(Map<String, Object> map, @PathVariable(value = "currentPage") int currentPage, HttpServletRequest request) {
+        Page<Product> page = new Page<Product>(currentPage, 20);
+        if (WebUtils.isMobile(request)) {
+            page = new Page<Product>(currentPage, 10);
+        }
+        Jrebel jrebel = new Jrebel();
         page = jrebel.selectPage(page, Condition.create().orderBy("id", false));
         map.put("jrebelList", JSON.toJSONString(page.getRecords()));
         map.put("page", page);
@@ -206,7 +220,7 @@ public class DashboardController {
         String fileName = "旺旺快捷短语_" + DateUtils.getMillisecondAsName() + ".xml";
         ShortcutPhrase shortcutPhrase = new ShortcutPhrase();
         Jrebel jrebel = new Jrebel();
-        List<Jrebel> jrebelList = jrebel.selectList(Condition.create().orderBy("id", false).last("limit 10"));
+        List<Jrebel> jrebelList = jrebel.selectList(Condition.create().isNull("defined_user_id").orderBy("id").last("limit 10"));
         List<ShortcutPhraseItem> shortcutPhraseItemList = new ArrayList<>();
         for (Jrebel j : jrebelList) {
             ShortcutPhraseItem shortcutPhraseItem = new ShortcutPhraseItem();
