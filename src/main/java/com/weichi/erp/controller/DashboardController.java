@@ -220,7 +220,7 @@ public class DashboardController {
         String fileName = "旺旺快捷短语_" + DateUtils.getMillisecondAsName() + ".xml";
         ShortcutPhrase shortcutPhrase = new ShortcutPhrase();
         Jrebel jrebel = new Jrebel();
-        List<Jrebel> jrebelList = jrebel.selectList(Condition.create().isNull("defined_user_id").orderBy("id").last("limit 10"));
+        List<Jrebel> jrebelList = jrebel.selectList(Condition.create().isNull("defined_user_id").orderBy("id"));
         List<ShortcutPhraseItem> shortcutPhraseItemList = new ArrayList<>();
         for (Jrebel j : jrebelList) {
             ShortcutPhraseItem shortcutPhraseItem = new ShortcutPhraseItem();

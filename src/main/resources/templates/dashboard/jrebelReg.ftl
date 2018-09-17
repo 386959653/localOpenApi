@@ -53,7 +53,7 @@ css='
                         </button>
                         <button id="exportShortcutPhrase" type="button" class="btn btn-info"
                                 onclick="javascrtpt:window.location.href='${ctx}/dashboardController/exportShortcutPhrase'">
-                            <i class="fa fa-plus"></i> 导出10条旺旺快捷短语
+                            <i class="fa fa-plus"></i> 导出旺旺快捷短语
                         </button>
                     </div>
                 </div>
