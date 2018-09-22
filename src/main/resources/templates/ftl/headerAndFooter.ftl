@@ -22,6 +22,7 @@
                     <#--<li <#if activeFlag="news" >class="active"</#if> ><a href="/news">新闻中心</a></li>-->
                         <li <#if activeFlag="product" >class="active"</#if> ><a href="/product">新品介绍</a></li>
                         <li <#if activeFlag="contact" >class="active"</#if> ><a href="/contact">联系我们</a></li>
+                        <li <#if activeFlag="diy" >class="active"</#if> ><a href="${ctx}/diy">自助取货</a></li>
                     </ul>
                 </div>
             </div>

@@ -233,3 +233,25 @@ create table jrebel
 
 alter table jrebel
   comment 'jrebel注册表';
+
+drop table if exists taobao_order;
+
+/*==============================================================*/
+/* Table: taobao_order                                          */
+/*==============================================================*/
+create table taobao_order
+(
+  id              bigint not null
+  comment '主键',
+  order_num       varchar(18) comment '订单编号',
+  enable_flag     enum ("Y", "N") default "Y"
+  comment '启用标志(Y/N)',
+  insert_username varchar(100) comment 'insert_username',
+  insert_time     datetime comment 'insert_time',
+  update_username varchar(100) comment 'update_username',
+  update_time     datetime comment 'update_time',
+  primary key (id)
+);
+
+alter table taobao_order
+  comment '淘宝订单表';

@@ -1,39 +1,30 @@
-<#import "${ctx}/ftl/base.ftl" as ListPage>
+<#import "ftl/headerAndFooter.ftl" as ListPage>
+<#import "ftl/lib.ftl" as com>
 
-<@ListPage.Html title="登录" headAttr='
-
-'
-css='
-body{
-    background: url("${ctx}/img/login.jpg");
-    background-repeat: no-repeat;
-}
+<@ListPage.Html title="自助取货 - ${companyName?if_exists}"css='
 .row{width: 100%;}
 .form-group{padding-left: 25px;}
-.form{background: rgba(255,255,255,0.2);margin:120px auto;}
-/*阴影*/
 .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}
 input[type="text"],input[type="password"]{padding-left:26px;}
-.checkbox{padding-left:21px;}
-'
->
-<div class="container">
-    <form id="loginForm" action="/user/login" method="post" class="form-horizontal" role="form">
+'>
+
+<div class="container" xmlns="http://www.w3.org/1999/html">
+    <form id="diyForm" action="${ctx}/getGoods" method="post" class="form-horizontal" role="form">
         <div class="form row">
             <div class="col-md-offset-4">
-                <h3 class="form-title" style="margin-left: 10px;">登录</h3>
+                <h1 class="form-title" style="margin-left: 10px;">自助取货</h1>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group ">
-                        <i class="fa fa-user fa-lg"></i>
-                        <input class="form-control required " type="text" placeholder="用户名" id="username"
-                               name="username" autofocus="autofocus"/>
-                    </div>
+                            <i class="fa fa-file-text"></i>
+                            <input class="form-control required " type="text" placeholder="订单编号" id="orderNum"
+                                   name="orderNum" autofocus="autofocus"/>
+                        </div>
                         <div class="form-group ">
-                        <i class="fa fa-lock fa-lg"></i>
-                        <input class="form-control required" type="password" placeholder="密码" id="password"
-                               name="password"/>
-                    </div>
+                            <i class="fa fa-envelope-o"></i>
+                            <input class="form-control required " type="text" placeholder="邮箱地址" id="email"
+                                   name="email" autofocus="autofocus"/>
+                        </div>
                         <div class="form-group ">
                             <div class="row">
                                 <div class="col-md-8 col-xs-6  ">
@@ -50,17 +41,12 @@ input[type="text"],input[type="password"]{padding-left:26px;}
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group ">
-                        <label class="checkbox">
-                            <input type="checkbox" name="remember-me"/>记住我
-                        </label>
-                    </div>
 
                         <div class="form-group ">
                             <button type="submit" class="btn btn-success pull-right" name="submit" id="submit"
-                                    style="margin-bottom:10px;">登录
-                        </button>
-                    </div>
+                                    style="margin-bottom:10px;">取货
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,9 +66,30 @@ input[type="text"],input[type="password"]{padding-left:26px;}
                 aria-hidden="true">
             &times;
         </button>
-        用户名或密码错误，请重新输入！
+        不存在该订单编号，请重新核对，如果您确认订单编号输入正确，可能是订单还没同步过来，请过3分钟后重试！
     </div>
                          </#if>
+
+            <#if emailError ??>
+    <div class="alert alert-danger alert-dismissable text-center">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">
+            &times;
+        </button>
+        请填写正确的邮箱格式！
+    </div>
+            </#if>
+
+    <#if jrebel ??>
+            <div class="well">
+                <p>
+                    亲，您的激活链接是：<br>
+                    http://jrebel.weichi.tech:9001/${jrebel.token?if_exists}
+    <@com.MY_HR/>
+                    对应邮箱：<br>${jrebel.definedUserId?if_exists}
+                </p>
+            </div>
+    </#if>
         </div>
     </form>
 
@@ -107,5 +114,5 @@ input[type="text"],input[type="password"]{padding-left:26px;}
         });
     });
 </script>
-
+​
 </@ListPage.Html>

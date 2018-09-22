@@ -1,17 +1,20 @@
 package com.weichi.erp.controller;
 
 import com.baomidou.mybatisplus.mapper.Condition;
+import com.google.code.kaptcha.Constants;
+import com.weichi.erp.Constant.BaseEnums;
 import com.weichi.erp.Constant.CarouselEnums;
-import com.weichi.erp.domain.Carousel;
-import com.weichi.erp.domain.Contact;
-import com.weichi.erp.domain.Product;
+import com.weichi.erp.component.utils.StringUtils;
+import com.weichi.erp.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by Wewon on 2018/7/19.
@@ -67,6 +70,47 @@ public class OfficialWebController {
         map.put("product", product.selectById(1L));
         map.put("activeFlag", "product");
         return "productInfo";
+    }
+
+    @RequestMapping("/diy")
+    public String diy(Map<String, Object> map) {
+        map.put("activeFlag", "diy");
+        return "diy";
+    }
+
+    @RequestMapping("/getGoods")
+    public String getGoods(HttpSession httpSession, Map<String, Object> map, @RequestParam(value = "orderNum") String orderNum,
+                           @RequestParam(value = "email") String email, @RequestParam(value = "verifyCode") String verifyCode) {
+        map.put("activeFlag", "diy");
+        if (!StringUtils.isEmail(email)) {
+            map.put("emailError", "emailError");
+            return "diy";
+        }
+        String captchaId = (String) httpSession.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if (!verifyCode.equalsIgnoreCase(captchaId)) {
+            httpSession.removeAttribute(Constants.KAPTCHA_SESSION_KEY);
+            map.put("captchaError", "captchaError");
+            return "diy";
+        }
+        TaobaoOrder taobaoOrder = new TaobaoOrder();
+        taobaoOrder.setOrderNum(orderNum);
+        taobaoOrder.setUpdateUsername("auto");
+        taobaoOrder.setEnableFlag(BaseEnums.enableFlag.N.name());
+        int taobaoOrderCount = taobaoOrder.selectCount(Condition.create().eq("order_num", orderNum).and().eq("enable_flag", BaseEnums.enableFlag.Y.name()));
+        if (taobaoOrderCount <= 0) {
+            map.put("error", "error");
+            return "diy";
+        }
+        taobaoOrder.update(Condition.create().eq("order_num", orderNum));
+        //把激活链接发送给前端
+        Jrebel jrebel = new Jrebel();
+        jrebel.setDefinedUserId(email);
+        jrebel.setToken(UUID.randomUUID().toString());
+        jrebel.setInsertUsername("auto");
+        jrebel.setUpdateUsername("auto");
+        jrebel.insert();
+        map.put("jrebel", jrebel);
+        return "diy";
     }
 
 
