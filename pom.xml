@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.weichi</groupId>
-    <artifactId>officialWeb</artifactId>
+    <artifactId>localOpenApi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>officialWeb</name>
-    <description>weichi officialWeb</description>
+    <name>localOpenApi</name>
+    <description>weichi localOpenApi</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -193,7 +193,7 @@
     </dependencies>
 
     <build>
-        <finalName>officialWeb</finalName>
+        <finalName>localOpenApi</finalName>
         <!--拷贝并替换属性文件中的占位符,用profile中的环境变量 -->
         <resources>
             <resource>
@@ -224,42 +224,10 @@
             </resource>
         </resources>
 
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ssh</artifactId>
-                <version>2.10</version>
-            </extension>
-        </extensions>
-
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>wagon-maven-plugin</artifactId>
-                <version>2.0.0</version>
-                <executions>
-                    <execution>
-                        <id>upload-javadoc</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>upload-single</goal>
-                            <goal>sshexec</goal>
-                        </goals>
-                        <configuration>
-                            <serverId>webserver</serverId>
-                            <fromFile>target/officialWeb.war</fromFile>
-                            <url>scp://47.100.47.85:22/usr/officialWeb/webapps/ROOT/</url>
-                            <commands>
-                                <command>/usr/officialWeb/webapps/ROOT/autoDeploy.sh</command>
-                            </commands>
-                            <displayCommandOutputs>true</displayCommandOutputs>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>
@@ -291,7 +259,8 @@
             </activation>
             <properties>
                 <resource.delimiter>${}</resource.delimiter>
-                <jdbc.url>jdbc:mysql://mysql:3306/officialWeb?useUnicode=true&amp;characterEncoding=utf8</jdbc.url>
+                <!--<jdbc.url>jdbc:mysql://mysql:3306/officialWeb?useUnicode=true&amp;characterEncoding=utf8</jdbc.url>-->
+                <jdbc.url>jdbc:mysql://47.100.47.85:3306/officialWeb?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false</jdbc.url>
                 <log4j.level>INFO</log4j.level>
                 <!--mybatis热加载-->
                 <refreshMapper>false</refreshMapper>

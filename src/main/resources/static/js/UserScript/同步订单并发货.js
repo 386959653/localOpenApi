@@ -5,7 +5,8 @@
 // @grant none
 // ==/UserScript==
 // 后端接口地址
-var apiUrl = "http://127.0.0.1:8080/addOrder";
+// var apiUrl = "http://127.0.0.1:8080/addOrder";
+var apiUrl = "http://127.0.0.1:8088/addOrder";
 
 var url = location.href;
 var rawArray = url.split("=")
