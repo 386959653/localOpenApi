@@ -9,15 +9,15 @@
              xsi:schemaLocation="http://www.zeroturnaround.com http://update.zeroturnaround.com/jrebel/rebel-2_1.xsd">
 
     <classpath>
-        <dir name="D:/IdeaProjects/officialWeb/target/classes">
+        <dir name="D:/IdeaProjects/localOpenApi/target/classes">
             <!-- Exclude the unimportant subpackage of package1-->
-            <exclude name="D:/IdeaProjects/officialWeb/target/officialWeb/WEB-INF/classes/mapper/**"/>
+            <exclude name="D:/IdeaProjects/localOpenApi/target/localOpenApi/WEB-INF/classes/mapper/**"/>
         </dir>
     </classpath>
 
     <web>
         <link target="/">
-            <dir name="D:/IdeaProjects/officialWeb/src/main/webapp">
+            <dir name="D:/IdeaProjects/localOpenApi/src/main/webapp">
             </dir>
         </link>
     </web>
