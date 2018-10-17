@@ -39,6 +39,9 @@ setTimeout(function () {
     var sellerName = $(".tb-seller-name").text().replace(/(^\s*)|(\s*$)/g, "")
     var title = $(".tb-sell-counter a").attr("title");
 //alert(title);
+//获取商品名称
+    var itemName = $(".tb-main-title").attr("data-title");
+
     var soldConut = parseInt(title.substring(7, title.lastIndexOf("件，")));
     var soldConutKey = itemId + "SoldConut";
     if (!localStorage.hasOwnProperty(soldConutKey)) {
@@ -67,7 +70,7 @@ setTimeout(function () {
         // 向后台同步数据
         var apiUrl = "http://127.0.0.1:8088/addSoldAndPrice";
 
-        var url = apiUrl + "?soldConut=" + soldConut + "&sellerName=" + sellerName + "&rmbNum=" + rmbNum + "&itemId=" + itemId + "&daySoldCount=" + daySoldCountLocal;
+        var url = apiUrl + "?soldConut=" + soldConut + "&sellerName=" + sellerName + "&rmbNum=" + rmbNum + "&itemId=" + itemId + "&daySoldCount=" + daySoldCountLocal + "&itemName=" + itemName;
         console.log(url);
         $.ajax({
             url: url,

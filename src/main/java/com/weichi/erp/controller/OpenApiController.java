@@ -36,7 +36,7 @@ public class OpenApiController {
     @RequestMapping("addSoldAndPrice")
     public void addSoldAndPrice(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestParam(value = "soldConut") Long soldConut
             , @RequestParam(value = "sellerName") String sellerName, @RequestParam(value = "rmbNum") BigDecimal rmbNum,
-                                @RequestParam(value = "itemId") Long itemId, @RequestParam(value = "daySoldCount") Long daySoldCount) throws IOException {
+                                @RequestParam(value = "itemId") Long itemId, @RequestParam(value = "daySoldCount") Long daySoldCount, @RequestParam(value = "itemName") String itemName) throws IOException {
         JsonResult jsonResult = new JsonResult();
         SoldPrice soldPrice = new SoldPrice();
         soldPrice.setSellerName(sellerName);
@@ -44,6 +44,7 @@ public class OpenApiController {
         soldPrice.setRmbNum(rmbNum);
         soldPrice.setItemId(itemId);
         soldPrice.setDaySoldCount(daySoldCount);
+        soldPrice.setItemName(itemName);
         soldPrice.setInsertUsername("auto");
         soldPrice.setUpdateUsername("auto");
         soldPrice.insert();

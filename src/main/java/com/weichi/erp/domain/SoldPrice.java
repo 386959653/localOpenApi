@@ -21,6 +21,16 @@ public class SoldPrice extends SuperDomain {
     private Long daySoldCount;
     private Long itemId;
 
+    private String itemName;
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
     public Long getDaySoldCount() {
         return daySoldCount;
     }
