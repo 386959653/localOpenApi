@@ -66,11 +66,11 @@ setTimeout(function () {
         localStorage.setItem(rmbNumKey, rmbNum);
     }
 
-    if (changeFlag) {
+    if (true) {
         // 向后台同步数据
         var apiUrl = "http://127.0.0.1:8088/addSoldAndPrice";
 
-        var url = apiUrl + "?soldConut=" + soldConut + "&sellerName=" + sellerName + "&rmbNum=" + rmbNum + "&itemId=" + itemId + "&daySoldCount=" + daySoldCountLocal + "&itemName=" + itemName;
+        var url = encodeURI(apiUrl + "?soldConut=" + soldConut + "&sellerName=" + sellerName + "&rmbNum=" + rmbNum + "&itemId=" + itemId + "&daySoldCount=" + daySoldCountLocal + "&itemName=" + itemName);
         console.log(url);
         $.ajax({
             url: url,
