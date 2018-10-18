@@ -66,7 +66,7 @@ setTimeout(function () {
         localStorage.setItem(rmbNumKey, rmbNum);
     }
 
-    if (true) {
+    if (changeFlag) {
         // 向后台同步数据
         var apiUrl = "http://127.0.0.1:8088/addSoldAndPrice";
 
